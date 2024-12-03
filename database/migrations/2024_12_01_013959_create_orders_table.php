@@ -13,15 +13,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('user_address_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained(); // Made nullable for guest orders
+            $table->string('guest_email')->nullable();
+            $table->string('guest_name')->nullable();
+            $table->string('guest_phone')->nullable();
+            $table->string('order_type'); // 'delivery' or 'pickup'
+            $table->foreignId('address_id')->nullable();
             $table->string('status');
             $table->decimal('subtotal', 8, 2);
-            $table->decimal('delivery_fee', 8, 2);
+            $table->decimal('delivery_fee', 8, 2)->nullable();
             $table->decimal('total', 8, 2);
             $table->string('payment_method');
             $table->string('payment_status');
-            $table->datetime('delivery_time');
+            $table->datetime('pickup_delivery_time');
             $table->text('notes')->nullable();
             $table->timestamps();
         });

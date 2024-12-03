@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\CartController;
+use App\Http\Controllers\Api\V1\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::prefix('v1')->group(function () {
     Route::get('products', [ProductController::class, 'index']);
     Route::get('featured-products', [ProductController::class, 'featured']);
     Route::get('meal-deals', [ProductController::class, 'mealDeals']);
+    Route::get('home', [HomeController::class, 'index']);
+    Route::get('home/refresh', [HomeController::class, 'refreshCache']);
     
     // Protected routes
     Route::middleware('auth:sanctum')->group(function () {

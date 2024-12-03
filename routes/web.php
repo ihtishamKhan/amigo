@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root')->middleware('auth');
 
 // customers route
 Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.list');

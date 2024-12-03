@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class MealDeal extends Model
 {
     use HasFactory;
 
@@ -15,14 +15,8 @@ class Product extends Model
         return $query->where('is_active', true);
     }
 
-    // Define the featured scope
-    public function scopeFeatured($query)
+    public function products()
     {
-        return $query->where('is_featured', true);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Product::class, 'meal_deal_products');
     }
 }
