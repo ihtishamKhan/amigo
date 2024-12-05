@@ -3,22 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Enums\OrderType;
 
 class CreateOrderRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         $rules = [
@@ -46,7 +40,7 @@ class CreateOrderRequest extends FormRequest
 
         // Add delivery-specific rules
         if ($this->input('order_type') === OrderType::DELIVERY->value) {
-            $rules['address_id'] = 'required|exists:addresses,id';
+            $rules['address_id'] = 'required|exists:user_addresses,id';
         }
 
         return $rules;

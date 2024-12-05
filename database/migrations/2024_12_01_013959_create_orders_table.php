@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('order_type'); // 'delivery' or 'pickup'
             $table->foreignId('address_id')->nullable();
             $table->string('status');
-            $table->decimal('subtotal', 8, 2);
+            $table->decimal('subtotal', 8, 2)->default(0);
             $table->decimal('delivery_fee', 8, 2)->nullable();
-            $table->decimal('total', 8, 2);
+            $table->decimal('total', 8, 2)->default(0);
             $table->string('payment_method');
             $table->string('payment_status');
             $table->datetime('pickup_delivery_time');

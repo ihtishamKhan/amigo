@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Enums\OrderType;
+use App\Http\Resources\OrderItemResource;
 
 class OrderResource extends JsonResource
 {

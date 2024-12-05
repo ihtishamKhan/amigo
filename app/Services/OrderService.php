@@ -2,20 +2,35 @@
 
 namespace App\Services;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\MealDeal;
+use App\Enums\OrderType;
+use App\Enums\OrderStatus;
+use App\Events\OrderCreated;
+use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
     public function createOrder(array $data)
     {
         return DB::transaction(function () use ($data) {
+            $subtotal = $this->calculateSubtotal($data);
+            $deliveryFee = $data['order_type'] === OrderType::DELIVERY->value 
+                ? $this->calculateDeliveryFee() 
+                : 0;
+            $total = $subtotal + $deliveryFee;
+
             // Handle guest vs authenticated user
             $orderData = [
                 'order_type' => $data['order_type'],
-                'status' => OrderStatus::PENDING,
+                'status' => OrderStatus::CREATED,
                 'payment_method' => $data['payment_method'],
                 'payment_status' => 'pending',
                 'pickup_delivery_time' => $data['pickup_delivery_time'],
-                'notes' => $data['notes'] ?? null
+                'notes' => $data['notes'] ?? null,
+                'subtotal' => $subtotal,
+                'delivery_fee' => $deliveryFee,
+                'total' => $total
             ];
 
             // Add user information based on auth status
@@ -35,27 +50,38 @@ class OrderService
 
             $order = Order::create($orderData);
 
-            // Process items (same as before)
-            $subtotal = $this->processOrderItems($order, $data);
+            $this->createOrderItems($order, $data);
 
-            // Calculate total
-            $total = $subtotal;
-            if ($order->order_type === OrderType::DELIVERY->value) {
-                $total += $order->delivery_fee;
-            }
-
-            $order->update([
-                'subtotal' => $subtotal,
-                'total' => $total
-            ]);
-
-            OrderCreated::dispatch($order);
+            // OrderCreated::dispatch($order);
 
             return $order;
         });
     }
 
-    private function processOrderItems($order, $data)
+    private function calculateSubtotal(array $data): float
+    {
+        $subtotal = 0;
+
+        // Calculate products subtotal
+        if (!empty($data['products'])) {
+            foreach ($data['products'] as $item) {
+                $product = Product::findOrFail($item['product_id']);
+                $subtotal += $product->price * $item['quantity'];
+            }
+        }
+
+        // Calculate meal deals subtotal
+        if (!empty($data['meal_deals'])) {
+            foreach ($data['meal_deals'] as $item) {
+                $mealDeal = MealDeal::findOrFail($item['meal_deal_id']);
+                $subtotal += $mealDeal->price * $item['quantity'];
+            }
+        }
+
+        return $subtotal;
+    }
+
+    private function createOrderItems($order, $data)
     {
         $subtotal = 0;
 

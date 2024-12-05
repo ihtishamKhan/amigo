@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\HomeController;
+use App\Http\Controllers\Api\V1\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::prefix('v1')->group(function () {
     Route::get('meal-deals', [ProductController::class, 'mealDeals']);
     Route::get('home', [HomeController::class, 'index']);
     Route::get('home/refresh', [HomeController::class, 'refreshCache']);
+
+    Route::post('orders', [OrderController::class, 'store']);
     
     // Protected routes
     Route::middleware('auth:sanctum')->group(function () {
