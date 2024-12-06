@@ -25,4 +25,13 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getImageUrlAttribute()
+    {
+        if(!$this->image) {
+            return null;
+        }
+
+        return asset('storage/products/' . $this->image);
+    }
 }

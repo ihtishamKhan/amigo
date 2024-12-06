@@ -19,4 +19,13 @@ class MealDeal extends Model
     {
         return $this->belongsToMany(Product::class, 'meal_deal_products');
     }
+
+    public function getImageUrlAttribute()
+    {
+        if(!$this->image) {
+            return null;
+        }
+
+        return asset('storage/products/' . $this->image);
+    }
 }
