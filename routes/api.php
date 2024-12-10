@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\HomeController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,20 @@ Route::prefix('v1')->group(function () {
     Route::get('home/refresh', [HomeController::class, 'refreshCache']);
 
     Route::post('orders', [OrderController::class, 'store']);
+
+    // Auth routes
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
     
     // Protected routes
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('user/addresses', [AddressController::class, 'index']);
         Route::post('cart/items', [CartController::class, 'addItem']);
         Route::get('cart', [CartController::class, 'show']);
+
+        // Auth routes
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::get('user', [AuthController::class, 'user']);
+        Route::post('email/resend', [AuthController::class, 'resendVerification']);
     });
 });
