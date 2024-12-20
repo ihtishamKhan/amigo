@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('payment_status');
             $table->datetime('pickup_delivery_time');
             $table->text('notes')->nullable();
+            $table->json('delivery_address')->nullable();
             $table->timestamps();
         });
     }

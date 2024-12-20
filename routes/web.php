@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root')->middleware('auth');
+
+// orders group route
+Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => 'auth'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('index');
+    Route::get('/create', [OrderController::class, 'create'])->name('create');
+    Route::post('/store', [OrderController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [OrderController::class, 'destroy'])->name('delete');
+});
 
 // customers route
 Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.list');

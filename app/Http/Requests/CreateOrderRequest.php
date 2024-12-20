@@ -40,7 +40,14 @@ class CreateOrderRequest extends FormRequest
 
         // Add delivery-specific rules
         if ($this->input('order_type') === OrderType::DELIVERY->value) {
-            $rules['address_id'] = 'required|exists:user_addresses,id';
+            $rules['address'] = 'required|array';
+            $rules['address.line1'] = 'required|string|max:255';
+            $rules['address.line2'] = 'nullable|string|max:255';
+            $rules['address.city'] = 'required|string|max:255';
+            $rules['address.state'] = 'required|string|max:255';
+            $rules['address.postcode'] = 'required|string|max:20';
+            $rules['address.latitude'] = 'nullable|numeric';
+            $rules['address.longitude'] = 'nullable|numeric';
         }
 
         return $rules;

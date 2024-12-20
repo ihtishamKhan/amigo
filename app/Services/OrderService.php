@@ -44,7 +44,11 @@ class OrderService
 
             // Handle delivery specific data
             if ($data['order_type'] === OrderType::DELIVERY->value) {
-                $orderData['address_id'] = $data['address_id'];
+                if(auth()->check()) {
+                    $orderData['address_id'] = $data['address_id'];
+                } else {
+                    $orderData['delivery_address'] = $data['address'];
+                }
                 $orderData['delivery_fee'] = $this->calculateDeliveryFee();
             }
 
@@ -92,7 +96,7 @@ class OrderService
                 $itemSubtotal = $product->price * $item['quantity'];
                 $subtotal += $itemSubtotal;
 
-                $order->items()->create([
+                $order->orderItems()->create([
                     'orderable_id' => $product->id,
                     'orderable_type' => Product::class,
                     'quantity' => $item['quantity'],
@@ -109,7 +113,7 @@ class OrderService
                 $itemSubtotal = $mealDeal->price * $item['quantity'];
                 $subtotal += $itemSubtotal;
 
-                $order->items()->create([
+                $order->orderItems()->create([
                     'orderable_id' => $mealDeal->id,
                     'orderable_type' => MealDeal::class,
                     'quantity' => $item['quantity'],

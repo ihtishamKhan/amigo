@@ -27,7 +27,7 @@
             </button>
 
             <!-- App Search-->
-            <form class="app-search d-none d-lg-block">
+            {{-- <form class="app-search d-none d-lg-block">
                 <div class="position-relative">
                     <input type="text" class="form-control" placeholder="@lang('translation.Search')">
                     <span class="bx bx-search-alt"></span>
@@ -165,15 +165,14 @@
                     </div>
 
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="d-flex">
 
-            <div class="dropdown d-inline-block d-lg-none ms-2">
-                <button type="button" class="btn header-item noti-icon waves-effect"
-                    id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+            {{-- <div class="dropdown d-inline-block d-lg-none ms-2">
+                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi mdi-magnify"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
@@ -185,21 +184,19 @@
                                 <input type="text" class="form-control" placeholder="@lang('translation.Search')"
                                     aria-label="Search input">
 
-                                <button class="btn btn-primary" type="submit"><i
-                                        class="mdi mdi-magnify"></i></button>
+                                <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="dropdown d-inline-block">
+            {{-- <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     @switch(Session::get('lang'))
                         @case('ru')
-                            <img src="{{ URL::asset('build/images/flags/russia.jpg') }}" alt="Header Language"
-                                height="16">
+                            <img src="{{ URL::asset('build/images/flags/russia.jpg') }}" alt="Header Language" height="16">
                         @break
 
                         @case('it')
@@ -207,8 +204,7 @@
                         @break
 
                         @case('gr')
-                            <img src="{{ URL::asset('build/images/flags/germany.jpg') }}" alt="Header Language"
-                                height="16">
+                            <img src="{{ URL::asset('build/images/flags/germany.jpg') }}" alt="Header Language" height="16">
                         @break
 
                         @case('sp')
@@ -234,8 +230,8 @@
 
                     <!-- item-->
                     <a href="{{ url('index/gr') }}" class="dropdown-item notify-item language" data-lang="gr">
-                        <img src="{{ URL::asset('build/images/flags/germany.jpg') }}" alt="user-image"
-                            class="me-1" height="12"> <span class="align-middle">German</span>
+                        <img src="{{ URL::asset('build/images/flags/germany.jpg') }}" alt="user-image" class="me-1"
+                            height="12"> <span class="align-middle">German</span>
                     </a>
 
                     <!-- item-->
@@ -246,13 +242,13 @@
 
                     <!-- item-->
                     <a href="{{ url('index/ru') }}" class="dropdown-item notify-item language" data-lang="ru">
-                        <img src="{{ URL::asset('build/images/flags/russia.jpg') }}" alt="user-image"
-                            class="me-1" height="12"> <span class="align-middle">Russian</span>
+                        <img src="{{ URL::asset('build/images/flags/russia.jpg') }}" alt="user-image" class="me-1"
+                            height="12"> <span class="align-middle">Russian</span>
                     </a>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="dropdown d-none d-lg-inline-block ms-1">
+            {{-- <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="bx bx-customize"></i>
@@ -268,8 +264,7 @@
                             </div>
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('build/images/brands/bitbucket.png') }}"
-                                        alt="bitbucket">
+                                    <img src="{{ URL::asset('build/images/brands/bitbucket.png') }}" alt="bitbucket">
                                     <span>Bitbucket</span>
                                 </a>
                             </div>
@@ -290,8 +285,7 @@
                             </div>
                             <div class="col">
                                 <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('build/images/brands/mail_chimp.png') }}"
-                                        alt="mail_chimp">
+                                    <img src="{{ URL::asset('build/images/brands/mail_chimp.png') }}" alt="mail_chimp">
                                     <span>Mail Chimp</span>
                                 </a>
                             </div>
@@ -309,7 +303,7 @@
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                     <i class="bx bx-fullscreen"></i>
                 </button>
-            </div>
+            </div> --}}
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect"
                     id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -438,11 +432,11 @@
                     </form>
                 </div>
             </div>
-            <div class="dropdown d-inline-block">
+            {{-- <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
                     <i class="bx bx-cog bx-spin"></i>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </header>

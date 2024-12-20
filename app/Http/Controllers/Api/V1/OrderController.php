@@ -16,4 +16,14 @@ class OrderController extends Controller
         
         return new OrderResource($order);
     }
+
+    public function getUsersOrders(Request $request)
+    {
+        $user = $request->user();
+        $orders = $user->orders()->with('items')->latest()->get();
+
+        return response()->json([
+            'data' => $orders
+        ]);
+    }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('address_line2')->nullable();
             $table->string('city');
             $table->string('postcode');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 10, 8);
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 10, 8)->nullable();
             $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
