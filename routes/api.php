@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
-use App\Http\Controllers\Api\V1\CartController;
+// use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\HomeController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\AuthController;
@@ -48,8 +48,8 @@ Route::prefix('v1')->group(function () {
 
         Route::get('user/orders', [OrderController::class, 'getUsersOrders']);
 
-        Route::post('cart/items', [CartController::class, 'addItem']);
-        Route::get('cart', [CartController::class, 'show']);
+        // Route::post('cart/items', [CartController::class, 'addItem']);
+        // Route::get('cart', [CartController::class, 'show']);
 
         // Auth routes
         Route::post('logout', [AuthController::class, 'logout']);

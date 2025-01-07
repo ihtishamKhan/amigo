@@ -27,6 +27,8 @@ Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => 'auth'], 
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [OrderController::class, 'destroy'])->name('delete');
+
+    Route::get('/receipt/{id}', [OrderController::class, 'printReceipt']);
 });
 
 // customers route

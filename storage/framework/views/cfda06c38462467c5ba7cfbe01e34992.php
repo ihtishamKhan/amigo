@@ -100,11 +100,15 @@
                                             data-bs-target="#view-order-<?php echo e($order->id); ?>" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
+
+                                        <a href="<?php echo e(route('orders.printTest', $order->id)); ?>"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-print"></i>
+                                        </a>
                                         <?php if (\Illuminate\Support\Facades\Blade::check('hasrole', 'Admin')): ?>
                                             <a href="#" data-bs-toggle="modal"
                                                 data-bs-target="#edit-order-<?php echo e($order->id); ?>"
-                                                class="btn
-                                            btn-primary btn-sm">
+                                                class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         <?php endif; ?>

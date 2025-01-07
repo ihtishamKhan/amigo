@@ -202,11 +202,15 @@
                                             data-bs-target="#view-order-{{ $order->id }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
+
+                                        <a href="{{ route('orders.printTest', $order->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-print"></i>
+                                        </a>
                                         @hasrole('Admin')
                                             <a href="#" data-bs-toggle="modal"
                                                 data-bs-target="#edit-order-{{ $order->id }}"
-                                                class="btn
-                                            btn-primary btn-sm">
+                                                class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         @endhasrole

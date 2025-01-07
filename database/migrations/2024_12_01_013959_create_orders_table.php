@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->foreignId('user_id')->nullable()->constrained(); // Made nullable for guest orders
             $table->string('guest_email')->nullable();
             $table->string('guest_name')->nullable();

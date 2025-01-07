@@ -26,8 +26,8 @@ class OrderResource extends JsonResource
                 'amount' => $this->total,
                 'formatted' => "£{$this->total}"
             ],
-            'items' => OrderItemResource::collection($this->items),
-            'address' => $this->when($this->address_id, new AddressResource($this->address)),
+            'items' => OrderItemResource::collection($this->orderItems),
+            'address' => $this->full_address,
             'payment_method' => $this->payment_method,
             'payment_status' => $this->payment_status,
             'notes' => $this->notes,

@@ -4,10 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
     use HasFactory;
+
+    // generate a unique order number
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($car) {
+            $car->uuid = (string) Str::uuid();
+        });
+    }
 
     protected $fillable = [
         'user_id', 'address_id', 'status', 'subtotal', 
@@ -66,10 +76,25 @@ class Order extends Model
 
     public function getFullAddressAttribute()
     {
-        return $this->address->full_address ?? 
-            $this->delivery_address['line1'] . ', ' . 
-            $this->delivery_address['line2'] . ', ' . 
-            $this->delivery_address['city'] . ', ' . 
-            $this->delivery_address['postcode'];
+        // First, try to get address from relationship
+        if (!is_null($this->address) && isset($this->address->full_address)) {
+            return $this->address->full_address;
+        }
+
+        // If address relationship fails, try delivery_address array
+        if (!is_null($this->delivery_address) && is_array($this->delivery_address)) {
+            $line1 = $this->delivery_address['line1'] ?? '';
+            $line2 = $this->delivery_address['line2'] ?? '';
+            $city = $this->delivery_address['city'] ?? '';
+            $postcode = $this->delivery_address['postcode'] ?? '';
+
+            // Filter out empty values and join with commas
+            $parts = array_filter([$line1, $line2, $city, $postcode], 'strlen');
+            return !empty($parts) ? implode(', ', $parts) : null;
+        }
+
+        // If both options fail, return null or a default value
+        return null;
     }
+
 }
