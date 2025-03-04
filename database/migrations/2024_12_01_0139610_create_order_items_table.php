@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('unit_price', 8, 2);
             $table->decimal('subtotal', 8, 2);
+            $table->json('options')->nullable(); // Store selected options, variants, add-ons
+            $table->text('special_instructions')->nullable();
             $table->timestamps();
         });
     }

@@ -4,10 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     // Define the active scope
     public function scopeActive($query)
@@ -33,5 +43,10 @@ class Product extends Model
         }
 
         return asset('storage/products/' . $this->image);
+    }
+
+    public function variations()
+    {
+        return $this->hasMany(ProductVariation::class);
     }
 }

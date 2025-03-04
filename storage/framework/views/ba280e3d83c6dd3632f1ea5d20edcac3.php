@@ -10,13 +10,10 @@
                 <li class="menu-title" key="t-menu"><?php echo app('translator')->get('translation.Menu'); ?></li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="<?php echo e(route('root')); ?>" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
-                        <span key="t-dashboards"><?php echo app('translator')->get('translation.Dashboards'); ?></span>
+                        <span key="t-dashboards">Dashboards</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="index" key="t-default"><?php echo app('translator')->get('translation.Default'); ?></a></li>
-                    </ul>
                 </li>
 
                 <li>

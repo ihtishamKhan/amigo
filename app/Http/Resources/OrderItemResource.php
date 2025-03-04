@@ -11,6 +11,7 @@ class OrderItemResource extends JsonResource
             'id' => $this->id,
             'name' => $this->orderable->name,
             'quantity' => $this->quantity,
+            'image' => $this->orderable->image_url,
             'price' => [
                 'amount' => $this->unit_price,
                 'formatted' => "£{$this->unit_price}"

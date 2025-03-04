@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -36,7 +37,12 @@ class HomeController extends Controller
 
     public function root()
     {
-        return view('index');
+        $total_orders = Order::count();
+        $delivered_orders = Order::where('status', 'Delivered')->count();
+        $cacelled_orders = Order::where('status', 'Cancelled')->count();
+        $revenue = Order::where('status', 'Delivered')->sum('total');
+
+        return view('index', compact('total_orders', 'delivered_orders', 'cacelled_orders', 'revenue'));
     }
 
     /*Language Translation*/

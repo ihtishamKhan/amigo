@@ -22,7 +22,7 @@ class Order extends Model
     protected $fillable = [
         'user_id', 'address_id', 'status', 'subtotal', 
         'delivery_fee', 'total', 'payment_method', 
-        'payment_status', 'delivery_time', 'notes', 'order_type', 'pickup_delivery_time', 'guest_email', 'guest_name', 'guest_phone', 'delivery_address'
+        'payment_status', 'delivery_time', 'notes', 'order_type', 'pickup_delivery_time', 'guest_email', 'guest_name', 'guest_phone', 'delivery_address', 'stripe_payment_intent_id', 'stripe_client_secret'
     ];
 
     protected $casts = [

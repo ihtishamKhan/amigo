@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->text('description');
-            $table->decimal('price', 8, 2);
-            $table->string('image');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('has_sizes')->default(false);
+            $table->string('has_addons')->default(false);
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->timestamps();

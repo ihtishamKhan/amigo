@@ -21,6 +21,7 @@ class CreateOrderRequest extends FormRequest
                 OrderType::PICKUP->value
             ])],
             'payment_method' => 'required|in:card,apple_pay',
+            'payment_method_id' => 'required|string',
             'pickup_delivery_time' => 'required|date|after:now',
             'notes' => 'nullable|string|max:500',
             'products' => 'array|nullable',

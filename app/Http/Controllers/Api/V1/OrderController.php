@@ -20,10 +20,20 @@ class OrderController extends Controller
     public function getUsersOrders(Request $request)
     {
         $user = $request->user();
-        $orders = $user->orders()->with('items')->latest()->get();
+        $orders = $user->orders()
+            ->with('orderItems')
+            ->latest()
+            ->paginate(10);
 
-        return response()->json([
-            'data' => $orders
+       return response()->json([
+            'orders' => OrderResource::collection($orders),
+            'pagination' => [
+                'current_page' => $orders->currentPage(),
+                'per_page' => $orders->perPage(),
+                'total' => $orders->total(),
+                'last_page' => $orders->lastPage(),
+                'has_more' => $orders->hasMorePages()
+            ]
         ]);
     }
 }

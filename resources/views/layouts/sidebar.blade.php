@@ -10,13 +10,10 @@
                 <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="{{ route('root') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
-                        <span key="t-dashboards">@lang('translation.Dashboards')</span>
+                        <span key="t-dashboards">Dashboards</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="index" key="t-default">@lang('translation.Default')</a></li>
-                    </ul>
                 </li>
 
                 <li>

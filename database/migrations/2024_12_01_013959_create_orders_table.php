@@ -25,6 +25,8 @@ return new class extends Migration
             $table->decimal('delivery_fee', 8, 2)->nullable();
             $table->decimal('total', 8, 2)->default(0);
             $table->string('payment_method');
+            $table->string('stripe_payment_intent_id')->nullable();
+            $table->string('stripe_client_secret')->nullable();
             $table->string('payment_status');
             $table->datetime('pickup_delivery_time');
             $table->text('notes')->nullable();

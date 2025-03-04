@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ProductVariationResource;
 
 class ProductResource extends JsonResource
 {
@@ -11,10 +12,11 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'price' => [
-                'amount' => $this->price,
-                'formatted' => "£{$this->price}"
+            'starting_from' => [
+                'amount' => $this->variations->min('price'),
+                'formatted' => "£{$this->variations->min('price')}"
             ],
+            'variations' => ProductVariationResource::collection($this->variations),
             'image' => $this->image_url,
             // 'category' => [
             //     'id' => $this->category_id,

@@ -203,7 +203,7 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('orders.printTest', $order->id) }}"
+                                        <a href="{{ route('orders.printReceipt', $order->id) }}"
                                             class="btn btn-primary btn-sm">
                                             <i class="fas fa-print"></i>
                                         </a>

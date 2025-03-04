@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meal_deals', function (Blueprint $table) {
+        Schema::create('product_variations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->text('description');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('name'); // e.g., '10"', '12"', 'Small', 'Large'
             $table->decimal('price', 8, 2);
-            $table->string('image');
-            $table->boolean('is_active')->default(true);
-            $table->boolean('is_featured')->default(false);
+            $table->boolean('is_default')->default(false);
+            $table->integer('display_order');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meal_deals');
+        Schema::dropIfExists('product_variations');
     }
 };

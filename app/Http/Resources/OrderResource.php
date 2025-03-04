@@ -31,7 +31,11 @@ class OrderResource extends JsonResource
             'payment_method' => $this->payment_method,
             'payment_status' => $this->payment_status,
             'notes' => $this->notes,
-            'created_at' => $this->created_at->toDateTimeString()
+            'created_at' => $this->created_at->toDateTimeString(),
+            'payment' => [
+                'client_secret' => $this->stripe_client_secret,
+                'payment_intent_id' => $this->stripe_payment_intent_id,
+            ],
         ];
     }
 }

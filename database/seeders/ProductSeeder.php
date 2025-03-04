@@ -13,9 +13,25 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
+        // Category IDs are based on the CategorySeeder
+        // 1: Pizza
+        // 2: Garlic Bread
+        // 3: Stuffed Crust
+        // 4: Kebabs
+        // 5: Wraps
+        // 6: Mexican
+        // 7: Fish & Chips
+        // 8: Burgers
+        // 9: Parmesan
+        // 10: Nachos
+        // 11: Sundries
+        // 12: Dips
+        // 13: Drinks
+        // 14: Desserts
+        // 15: Kids Meals
         $products = [
             [
-                'category_id' => 2, // Burgers
+                'category_id' => 8, // Burgers
                 'name' => 'Beef Burger',
                 'slug' => 'beef-burger',
                 'description' => 'Premium beef patty with fresh vegetables and special sauce',
@@ -25,7 +41,7 @@ class ProductSeeder extends Seeder
                 'is_featured' => true,
             ],
             [
-                'category_id' => 2,
+                'category_id' => 8,
                 'name' => 'Chicken Burger',
                 'slug' => 'chicken-burger',
                 'description' => 'Grilled chicken breast with lettuce and mayo',
@@ -45,7 +61,7 @@ class ProductSeeder extends Seeder
                 'is_featured' => true,
             ],
             [
-                'category_id' => 3, // Garlic Bread
+                'category_id' => 2, // Garlic Bread
                 'name' => 'Classic Garlic Bread',
                 'slug' => 'classic-garlic-bread',
                 'description' => 'Freshly baked bread with garlic butter',

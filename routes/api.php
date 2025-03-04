@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\HomeController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\AddressController;
+use App\Http\Controllers\Api\V1\StripeWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +57,6 @@ Route::prefix('v1')->group(function () {
         Route::get('user', [AuthController::class, 'user']);
         Route::post('email/resend', [AuthController::class, 'resendVerification']);
     });
+
+    Route::post('stripe/webhook', [StripeWebhookController::class, 'handleWebhook']);
 });

@@ -49,12 +49,17 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+        if(env('APP_ENV') === 'local') {
+            $this->clearRelatedCaches();
+        }
+        
         $categoryId = $request->query('category_id');
         $page = $request->query('page', 1);
         
         $cacheKey = "home_data_{$categoryId}_page_{$page}";
+        $cacheDuration = now()->addDays(7);
 
-        return Cache::remember($cacheKey, 3600, function () use ($categoryId, $page) {
+        return Cache::remember($cacheKey, $cacheDuration, function () use ($categoryId, $page) {
             // These don't need pagination
             $mealDeals = MealDealListResource::collection(
                 MealDeal::active()
@@ -64,7 +69,7 @@ class HomeController extends Controller
             );
 
             $categories = Category::active()
-                ->orderBy('sort_order')
+                ->orderBy('display_order')
                 ->get();
 
             // Products with pagination
@@ -73,7 +78,6 @@ class HomeController extends Controller
                     return $query->where('category_id', $categoryId);
                 })
                 ->paginate(10);
-                
 
             return response()->json([
                 'meal_deals' => $mealDeals,

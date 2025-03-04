@@ -8,9 +8,17 @@ use App\Enums\OrderType;
 use App\Enums\OrderStatus;
 use App\Events\OrderCreated;
 use Illuminate\Support\Facades\DB;
+use App\Services\StripeService;
 
 class OrderService
 {
+    private $stripeService;
+
+    public function __construct(StripeService $stripeService)
+    {
+        $this->stripeService = $stripeService;
+    }
+
     public function createOrder(array $data)
     {
         return DB::transaction(function () use ($data) {
@@ -20,18 +28,29 @@ class OrderService
                 : 0;
             $total = $subtotal + $deliveryFee;
 
+            // Create Stripe Payment Intent
+            $paymentIntent = $this->stripeService->createPaymentIntent(
+                $total,
+                'gbp', // or your currency
+                $data['payment_method'],
+                $data['payment_method_id']
+            );
+
             // Handle guest vs authenticated user
             $orderData = [
                 'order_type' => $data['order_type'],
                 'status' => OrderStatus::CREATED,
                 'payment_method' => $data['payment_method'],
-                'payment_status' => 'pending',
                 'pickup_delivery_time' => $data['pickup_delivery_time'],
                 'notes' => $data['notes'] ?? null,
                 'subtotal' => $subtotal,
                 'delivery_fee' => $deliveryFee,
-                'total' => $total
+                'total' => $total,
+                'stripe_payment_intent_id' => $paymentIntent->id,
+                'stripe_client_secret' => $paymentIntent->client_secret,
+                'payment_status' => 'pending',
             ];
+
 
             // Add user information based on auth status
             if (auth()->check()) {
@@ -44,11 +63,12 @@ class OrderService
 
             // Handle delivery specific data
             if ($data['order_type'] === OrderType::DELIVERY->value) {
-                if(auth()->check()) {
-                    $orderData['address_id'] = $data['address_id'];
-                } else {
-                    $orderData['delivery_address'] = $data['address'];
-                }
+                // if(auth()->check()) {
+                //     $orderData['address_id'] = $data['address_id'];
+                // } else {
+                //     $orderData['delivery_address'] = $data['address'];
+                // }
+                $orderData['delivery_address'] = $data['address'];
                 $orderData['delivery_fee'] = $this->calculateDeliveryFee();
             }
 
