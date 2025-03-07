@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('addon_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name'); // e.g., 'Sauces', 'Toppings'
+            $table->boolean('is_required')->default(false);
+            $table->integer('min_selections')->default(0);
+            $table->integer('max_selections')->default(1);
             $table->timestamps();
         });
     }

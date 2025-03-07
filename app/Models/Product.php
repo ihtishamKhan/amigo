@@ -49,4 +49,11 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariation::class);
     }
+
+    public function addonCategories()
+    {
+        return $this->belongsToMany(AddonCategory::class, 'product_addon_categories')
+                    ->withPivot('display_order')
+                    ->withTimestamps();
+    }
 }

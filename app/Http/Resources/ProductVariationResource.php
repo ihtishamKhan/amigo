@@ -14,6 +14,16 @@ class ProductVariationResource extends JsonResource
                 'amount' => $this->price,
                 'formatted' => "£{$this->price}"
             ],
+            'addons' => $this->addons->map(function ($addon) {
+                return [
+                    'id' => $addon->id,
+                    'name' => $addon->name,
+                    'price' => [
+                        'amount' => $addon->pivot->price_multiplier,
+                        'formatted' => "£{$addon->pivot->price_multiplier}"
+                    ]
+                ];
+            }),
         ];
     }
 }
