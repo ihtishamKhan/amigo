@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\ProductVariation;
 use App\Models\ProductAddonCategoryVariant;
 use Illuminate\Support\Facades\Cache;
+use App\Models\OptionPrice;
 
 class HomeController extends Controller
 {
@@ -53,8 +54,9 @@ class HomeController extends Controller
     {
         if(env('APP_ENV') === 'local') {
             $this->clearRelatedCaches();
+            $this->clearRelatedCaches($request->query('category_id'));
         }
-        
+
         $categoryId = $request->query('category_id');
         $page = $request->query('page', 1);
         
@@ -74,43 +76,17 @@ class HomeController extends Controller
                 ->orderBy('display_order')
                 ->get();
 
-            // Products with pagination
-            $products = Product::active()
-                ->with([
-                    'variations' => function($query) {
-                        $query->orderBy('display_order');
-                    },
-                    'addonCategories' => function($query) {
-                        $query->with(['addons' => function($q) {
-                            $q->where('is_active', true)->orderBy('display_order');
-                        }])->orderBy('display_order');
-                    }
-                ])
-                ->when($categoryId, function ($query) use ($categoryId) {
-                    return $query->where('category_id', $categoryId);
-                })
-                ->paginate(10);
-
-            $productIds = $products->pluck('id')->toArray();
-            $variationIds = ProductVariation::whereIn('product_id', $productIds)
-                ->pluck('id')
-                ->toArray();
-
-            // Preload all product-variation-addon relationships for these products
-            $variantAddonCategories = ProductAddonCategoryVariant::whereIn('product_id', $productIds)
-                ->whereIn('variant_id', $variationIds)
-                ->with(['addonCategory.addons' => function($query) {
-                    $query->where('is_active', true)->orderBy('display_order');
-                }])
-                ->get()
-                ->groupBy(['product_id', 'variant_id']);
-
-            // Add the variant addon data to the product collection
-            $products->each(function($product) use ($variantAddonCategories) {
-                if (isset($variantAddonCategories[$product->id])) {
-                    $product->variantAddonCategories = $variantAddonCategories[$product->id];
-                }
-            });
+            // Products with pagination and all related data
+            $products = Product::with([
+                'variations.optionGroups.options',
+                'variations.addonCategories.addons',
+                'optionGroups.options',
+                'addonCategories.addons'
+            ])
+            ->when($categoryId, function ($query) use ($categoryId) {
+                return $query->where('category_id', $categoryId);
+            })
+            ->paginate(10);
 
             return response()->json([
                 'meal_deals' => $mealDeals,

@@ -6,7 +6,15 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\ProductVariation;
-
+use App\Models\OptionGroup;
+use Illuminate\Support\Str;
+use App\Models\Option;
+use App\Models\OptionPrice;
+use Illuminate\Support\Facades\DB;
+use App\Models\AddonCategory;
+use App\Models\AddonCategoryVariant;
+use App\Models\Addon;
+use App\Models\AddonVariant;
 
 class PizzaSeeder extends Seeder
 {
@@ -17,11 +25,12 @@ class PizzaSeeder extends Seeder
     {
         // Pizza category ID is assumed to be 1
         $pizzaCategoryId = 1;
+
+        $crustTypes = OptionGroup::where('name', 'Crust Type')->first();
     
         // Define all pizzas from the menu with their descriptions and prices
         $pizzas = [
             [
-                'id' => 1,
                 'name' => 'MARGARITA',
                 'description' => 'Cheese & Tomato',
                 'prices' => [
@@ -31,7 +40,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 2,
                 'name' => 'AL FUNGHI',
                 'description' => 'Mushroom',
                 'prices' => [
@@ -41,7 +49,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 3,
                 'name' => 'VEGETARIAN',
                 'description' => 'Mushroom, Onion, Peppers',
                 'prices' => [
@@ -51,7 +58,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 4,
                 'name' => 'LONDON PIZZA',
                 'description' => 'Chips',
                 'prices' => [
@@ -61,7 +67,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 5,
                 'name' => 'HAM',
                 'description' => 'Turkey Ham',
                 'prices' => [
@@ -71,7 +76,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 6,
                 'name' => 'HAWAIIAN',
                 'description' => 'Turkey Ham & Pineapple',
                 'prices' => [
@@ -81,7 +85,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 7,
                 'name' => 'HAM & MUSHROOM',
                 'description' => 'Turkey Ham & Mushroom',
                 'prices' => [
@@ -91,7 +94,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 8,
                 'name' => 'CALZONE',
                 'description' => '(FOLDED) Turkey Ham, Onion & Mushroom',
                 'prices' => [
@@ -101,7 +103,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 10,
                 'name' => 'CHICKEN',
                 'description' => 'Chicken',
                 'prices' => [
@@ -111,7 +112,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 11,
                 'name' => 'BBQ CHICKEN',
                 'description' => 'BBQ Sauce & Chicken',
                 'prices' => [
@@ -121,7 +121,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 12,
                 'name' => 'CHICKEN CURRY',
                 'description' => 'Curry Sauce & Chicken',
                 'prices' => [
@@ -131,7 +130,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 13,
                 'name' => 'CHICKEN & MUSHROOM',
                 'description' => 'Chicken & Mushroom',
                 'prices' => [
@@ -141,7 +139,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 14,
                 'name' => 'CHICKEN & SWEETCORN',
                 'description' => 'Chicken & Sweetcorn',
                 'prices' => [
@@ -151,7 +148,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 15,
                 'name' => 'CHICKEN KEV',
                 'description' => 'Chicken, Mushroom & Garlic',
                 'prices' => [
@@ -161,7 +157,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 16,
                 'name' => 'CHICKEN TIKKA',
                 'description' => 'Chicken Tikka & Onion',
                 'prices' => [
@@ -171,7 +166,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 17,
                 'name' => 'CHICKEN TANDOORI',
                 'description' => 'Chicken Tandoori & Onion',
                 'prices' => [
@@ -181,7 +175,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 18,
                 'name' => 'HOT VEGETARIAN',
                 'description' => 'Chilli, Mushroom, Onion, Peppers & Sweetcorn',
                 'prices' => [
@@ -191,7 +184,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 19,
                 'name' => 'HOT & SPICY',
                 'description' => 'Chilli, Jalapenos, Onion, Peppers & Mushroom',
                 'prices' => [
@@ -201,7 +193,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 20,
                 'name' => 'INFERNO',
                 'description' => 'Chilli, Salami, Peppers & Jalapenos',
                 'prices' => [
@@ -211,7 +202,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 21,
                 'name' => 'MEXICAN',
                 'description' => 'Chilli, Jalapenos, Mushroom, Onion & Jalapenos',
                 'prices' => [
@@ -221,7 +211,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 22,
                 'name' => 'SPICY CHICKEN',
                 'description' => 'Chilli, Chicken & Jalapenos',
                 'prices' => [
@@ -231,7 +220,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 23,
                 'name' => 'PEPPERONI',
                 'description' => 'Pepperoni',
                 'prices' => [
@@ -241,7 +229,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 24,
                 'name' => 'PEPPERONI SPECIAL',
                 'description' => 'Pepperoni, Onion & Peppers',
                 'prices' => [
@@ -251,7 +238,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 25,
                 'name' => 'SALAMI',
                 'description' => 'Salami',
                 'prices' => [
@@ -261,7 +247,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 26,
                 'name' => 'BOLOGNESE',
                 'description' => 'Bolognese',
                 'prices' => [
@@ -271,7 +256,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 27,
                 'name' => 'ALL MEAT',
                 'description' => 'Pepperoni, Salami, Bolognese & Turkey Ham',
                 'prices' => [
@@ -281,7 +265,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 28,
                 'name' => 'KEBAB PIZZA',
                 'description' => 'Donner Meat',
                 'prices' => [
@@ -291,7 +274,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 29,
                 'name' => 'KEBAB CALZONE',
                 'description' => '(FOLDED) Donner Meat & Onion',
                 'prices' => [
@@ -301,7 +283,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 30,
                 'name' => 'TUNA',
                 'description' => 'Tuna',
                 'prices' => [
@@ -311,7 +292,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 31,
                 'name' => 'TUNA SWEETCORN',
                 'description' => 'Tuna & Sweetcorn',
                 'prices' => [
@@ -321,7 +301,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 32,
                 'name' => 'NEPTUNE',
                 'description' => 'Tuna & Prawn',
                 'prices' => [
@@ -331,7 +310,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 33,
                 'name' => 'SEAFOOD SPECIAL',
                 'description' => 'Tuna, Prawns & Mussels',
                 'prices' => [
@@ -341,7 +319,6 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'id' => 34,
                 'name' => 'AMIGO\'S SPECIAL',
                 'description' => '4 toppings of your choice',
                 'prices' => [
@@ -351,30 +328,35 @@ class PizzaSeeder extends Seeder
                 ]
             ]
         ];
+
+        // Create option groups for crust types
+        $crustOptionsGroups = OptionGroup::get();
+
+        // Create options for each crust option group
+        $toppingCategories = AddonCategory::get();
         
+
         // Create products and their variants
-        foreach ($pizzas as $pizzaData) {
-            $product = Product::updateOrCreate(
+        foreach ($pizzas as $index => $pizzaData) {
+            $product = Product::firstOrCreate(
                 [
-                    'id' => $pizzaData['id'],
-                    'category_id' => $pizzaCategoryId
+                    'category_id' => $pizzaCategoryId,
+                    'name' => $pizzaData['name']
                 ],
                 [
-                    'name' => $pizzaData['name'],
-                    // 'slug' => Str::slug($pizzaData['name']),
                     'description' => $pizzaData['description'],
-                    'has_sizes' => true,
+                    'has_variations' => true,
+                    'has_options' => true,
                     'has_addons' => true,
-                    'is_active' => true,
-                    'is_featured' => in_array($pizzaData['id'], [1, 2, 3, 4]), // Featured pizzas
-                    // 'image' => 'products/pizza-' . Str::slug($pizzaData['name']) . '.jpg',
+                    'is_featured' => $index === 0, // Make first pizza featured
+                    // 'display_order' => $index + 1,
+                    // 'is_active' => true
                 ]
             );
-            
-            // Create size variants
-            $displayOrder = 1;
+
+            // Create size variants with links to the appropriate option groups and addon categories
             foreach ($pizzaData['prices'] as $size => $price) {
-                ProductVariation::updateOrCreate(
+                $variation = ProductVariation::firstOrCreate(
                     [
                         'product_id' => $product->id,
                         'name' => $size
@@ -382,9 +364,13 @@ class PizzaSeeder extends Seeder
                     [
                         'price' => $price,
                         'is_default' => ($size === '10"'), // 10" is the default size
-                        'display_order' => $displayOrder++
+                        'display_order' => $size === '10"' ? 1 : ($size === '12"' ? 2 : 3),
+                        'is_active' => true,
                     ]
                 );
+
+                $variation->addonCategories()->attach($toppingCategories->where('name', $size . ' Toppings')->first()->id);
+                $variation->optionGroups()->attach($crustOptionsGroups->where('name', $size . ' Crust Options')->first()->id);
             }
         }
     }

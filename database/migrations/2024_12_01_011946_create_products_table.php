@@ -18,10 +18,15 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('has_sizes')->default(false);
-            $table->string('has_addons')->default(false);
-            $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
+            $table->boolean('has_variations')->default(false);
+            $table->boolean('has_sizes')->default(false);
+            $table->boolean('has_options')->default(false); // For crust types, flavors, etc.
+            $table->boolean('has_addons')->default(false);  // For toppings, extras shown in your image
+            $table->boolean('has_sides')->default(false);   // For side options (chips, salad)
+            $table->boolean('has_sauces')->default(false);  // For sauce selections
+            $table->decimal('price', 8, 2)->nullable();     // Base price for products without variations
+            $table->integer('required_selections')->default(0); // Number of required selections for sides/sauces
             $table->timestamps();
             $table->softDeletes();
         });

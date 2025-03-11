@@ -50,10 +50,33 @@ class Product extends Model
         return $this->hasMany(ProductVariation::class);
     }
 
+    // Direct option groups (for products without variations)
+    public function optionGroups()
+    {
+        return $this->belongsToMany(OptionGroup::class, 'product_option_group')
+            ->withPivot('display_order')
+            ->orderBy('pivot_display_order')
+            ->where('is_active', true)
+            ->withTimestamps();
+    }
+    
+    // Direct addon categories (for products without variations)
     public function addonCategories()
     {
-        return $this->belongsToMany(AddonCategory::class, 'product_addon_categories')
-                    ->withPivot('display_order')
-                    ->withTimestamps();
+        return $this->belongsToMany(AddonCategory::class, 'product_addon_category')
+            ->withPivot('display_order')
+            ->orderBy('pivot_display_order')
+            ->where('is_active', true)
+            ->withTimestamps();
+    }
+
+    // Helper method to get starting price
+    public function getStartingPriceAttribute()
+    {
+        if ($this->has_variations) {
+            return $this->variations()->min('price') ?? 0;
+        }
+        
+        return $this->price ?? 0;
     }
 }

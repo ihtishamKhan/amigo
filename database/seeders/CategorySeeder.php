@@ -28,13 +28,13 @@ class CategorySeeder extends Seeder
                 'display_order' => 2,
                 'is_active' => true,
             ],
-            [
-                'name' => 'Stuffed Crust',
-                'slug' => 'stuffed-crust',
-                'image' => 'crust-image.png',
-                'display_order' => 3,
-                'is_active' => true,
-            ],
+            // [
+            //     'name' => 'Stuffed Crust',
+            //     'slug' => 'stuffed-crust',
+            //     'image' => 'crust-image.png',
+            //     'display_order' => 3,
+            //     'is_active' => true,
+            // ],
             [
                 'name' => 'Kebabs',
                 'slug' => 'kebabs',

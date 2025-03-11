@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\ProductVariationResource;
 
 class ProductResource extends JsonResource
 {
@@ -15,66 +14,98 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'image' => $this->image ? asset('storage/' . $this->image) : null,
-            'has_sizes' => (bool)$this->has_sizes,
-            'has_addons' => (bool)$this->has_addons,
+            'has_variations' => (bool)$this->has_variations,
+            'price' => $this->when(!$this->has_variations, (float)$this->price),
             'is_featured' => (bool)$this->is_featured,
-            'starting_from' => (float)$this->variations->min('price'),
+            'starting_price' => (float)$this->starting_price,
             
             // Include variations when they exist
-            'variations' => $this->when($this->has_sizes, function() {
+            'variations' => $this->when($this->has_variations, function() {
                 return $this->variations->map(function($variation) {
                     return [
                         'id' => $variation->id,
                         'name' => $variation->name,
                         'price' => (float)$variation->price,
                         'is_default' => (bool)$variation->is_default,
-                        'addon_categories' => $this->when(
-                            isset($this->variantAddonCategories) && 
-                            isset($this->variantAddonCategories[$variation->id]), 
-                            function() use ($variation) {
-                                return $this->variantAddonCategories[$variation->id]->map(function($acv) {
-                                    return [
-                                        'id' => $acv->addonCategory->id,
-                                        'name' => $acv->addonCategory->name,
-                                        'is_required' => (bool)$acv->addonCategory->is_required,
-                                        'min_selections' => $acv->addonCategory->min_selections,
-                                        'max_selections' => $acv->addonCategory->max_selections,
-                                        'price_multiplier' => (float)$acv->price_multiplier,
-                                        'addons' => $acv->addonCategory->addons->map(function($addon) use ($acv) {
-                                            return [
-                                                'id' => $addon->id,
-                                                'name' => $addon->name,
-                                                'price' => (float)($addon->price * $acv->price_multiplier),
-                                            ];
-                                        }),
-                                    ];
-                                });
-                            },
-                            []
-                        )
+                        
+                        // Include option groups for this variation
+                        'option_groups' => OptionGroupResource::collection($variation->optionGroups),
+                        
+                        // Include addon categories for this variation
+                        'addon_categories' => AddonCategoryResource::collection($variation->addonCategories),
                     ];
                 });
             }, []),
+            
+            // Include option groups and addon categories for products without variations
+            'option_groups' => $this->when(!$this->has_variations, function() {
+                return OptionGroupResource::collection($this->optionGroups);
+            }, []),
+            
+            'addon_categories' => $this->when(!$this->has_variations, function() {
+                return AddonCategoryResource::collection($this->addonCategories);
+            }, []),
+        ];
+    }
+}
 
-            // Include global addon categories (those not tied to variations)
-            'global_addon_categories' => $this->when($this->has_addons, function() {
-                return $this->addonCategories->map(function($category) {
-                    return [
-                        'id' => $category->id,
-                        'name' => $category->name,
-                        'is_required' => (bool)$category->is_required,
-                        'min_selections' => $category->min_selections,
-                        'max_selections' => $category->max_selections,
-                        'addons' => $category->addons->map(function($addon) {
-                            return [
-                                'id' => $addon->id,
-                                'name' => $addon->name,
-                                'price' => (float)$addon->price,
-                            ];
-                        }),
-                    ];
-                });
-            }, []),
+class OptionGroupResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'is_required' => (bool)$this->is_required,
+            'min_selections' => $this->min_selections,
+            'max_selections' => $this->max_selections,
+            'display_order' => $this->display_order,
+            'options' => OptionResource::collection($this->whenLoaded('options')),
+        ];
+    }
+}
+
+class OptionResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => (float)$this->price,
+            'is_default' => (bool)$this->is_default,
+            'display_order' => $this->display_order,
+        ];
+    }
+}
+
+class AddonCategoryResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'display_name' => $this->display_name,
+            'is_required' => (bool)$this->is_required,
+            'min_selections' => $this->min_selections,
+            'max_selections' => $this->max_selections,
+            'display_order' => $this->display_order,
+            'addons' => AddonResource::collection($this->whenLoaded('addons')),
+        ];
+    }
+}
+
+class AddonResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => (float)$this->price,
+            'is_default' => (bool)$this->is_default,
+            'display_order' => $this->display_order,
         ];
     }
 }
