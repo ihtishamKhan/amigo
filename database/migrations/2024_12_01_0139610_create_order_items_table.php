@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained();
             $table->morphs('orderable'); // This will handle both products and meal deals
+            $table->unsignedBigInteger('product_variation_id')->nullable();
             $table->integer('quantity');
             $table->decimal('unit_price', 8, 2);
             $table->decimal('subtotal', 8, 2);

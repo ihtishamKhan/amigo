@@ -201,6 +201,292 @@ class ProductSeeder extends Seeder
                 'is_active' => true,
                 'is_featured' => true,
             ],
+            [
+                'category_id' => 4,
+                'name' => 'CHEESE CHIPS WRAP',
+                'description' => '',
+                'price' => 5.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 4,
+                'name' => 'CHEESE CHIPS PEPPERONI WRAP',
+                'description' => '',
+                'price' => 6.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 4,
+                'name' => 'CHEESE CHIPS JALAPENO WRAP',
+                'description' => '',
+                'price' => 6.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 4,
+                'name' => 'CHIPS WRAP',
+                'description' => '',
+                'price' => 4.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 4,
+                'name' => 'MEGA KEBAB WRAP',
+                'description' => '',
+                'price' => 9.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
         ];
+
+        foreach ($wraps as $index => $wrap) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $wrap['category_id'],
+                    'name' => $wrap['name']
+                ],
+                [
+                    'description' => $wrap['description'],
+                    'has_options' => true,
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            $product->optionGroups()->attach($sides, ['display_order' => 1]);
+
+            $product->optionGroups()->attach($sauces, ['display_order' => 2]);
+            
+        }
+
+        $mexicans = [
+            [
+                'category_id' => 5,
+                'name' => 'Mexican Combo',
+                'description' => '2 x Tortillas, 1 filled with: chicken, chilli, onion, peppers & jalapenos and the other with beef, chilli, onion, peppers & jalapenos',
+                'price' => 9.99,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 5,
+                'name' => 'Beef Burrito',
+                'description' => '2 x Tortillas filled with beef, chilli, onion, peppers & jalapenos.',
+                'price' => 9.99,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 5,
+                'name' => 'Chicken Burrito',
+                'description' => '2 x Tortillas filled with chicken, chilli, onion, peppers & jalapenos.',
+                'price' => 9.99,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ]
+        ];
+
+        foreach ($mexicans as $index => $mexican) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $mexican['category_id'],
+                    'name' => $mexican['name']
+                ],
+                [
+                    'description' => $mexican['description'],
+                    'has_options' => true,
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            $product->optionGroups()->attach($sides, ['display_order' => 1]);            
+        }
+
+        $fishAndChips = [
+            [
+                'category_id' => 6,
+                'name' => 'CHIPS',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'COD',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+                'variations' => [
+                    [
+                        'name' => 'Small',
+                        'price' => 7.00,
+                    ],
+                    [
+                        'name' => 'Large',
+                        'price' => 9.00,
+                    ],
+                ],
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'COD BITES (5)',
+                'description' => '',
+                'price' => 7.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'CHIPS & SAUCE',
+                'description' => '',
+                'price' => 3.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'CHEESY CHIPS',
+                'description' => '',
+                'price' => 4.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'CHEESY CHIPS & BOLOGNESE',
+                'description' => '',
+                'price' => 5.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'SCAMPI (10) WITH CHIPS & SAUCE',
+                'description' => '',
+                'price' => 6.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'CHIP BUTTY',
+                'description' => '',
+                'price' => 3.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'FISH CAKE',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'JUMBO SAUSAGE',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'JUMBO SAUSAGE',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'JUMBO SAUSAGE & CHIPS',
+                'description' => '',
+                'price' => 4.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'BATTERED BURGER',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'MINCE PIE',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'CHEESE SAVOURY',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => 6,
+                'name' => 'CORNED BEEF SAVOURY',
+                'description' => '',
+                'price' => 2.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'is_active' => true,
+                'is_featured' => true,
+            ],
+        ];
+
+        foreach ($fishAndChips as $index => $fAndC) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $fAndC['category_id'],
+                    'name' => $fAndC['name']
+                ],
+                [
+                    'description' => $fAndC['description'],
+                    'has_options' => true,
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            if(isset($fAndC['variations'])) {
+                $product->variations()->createMany($fAndC['variations']);
+            }
+            
+            $product->optionGroups()->sync($sides, ['display_order' => 1]);
+        }
     }
 }

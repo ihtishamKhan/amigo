@@ -24,9 +24,26 @@ class CreateOrderRequest extends FormRequest
             'payment_method_id' => 'required|string',
             'pickup_delivery_time' => 'required|date|after:now',
             'notes' => 'nullable|string|max:500',
+            
+            // Updated products with variations, options and addons
             'products' => 'array|nullable',
             'products.*.product_id' => 'required|exists:products,id',
             'products.*.quantity' => 'required|integer|min:1',
+            'products.*.variation_id' => 'nullable|exists:product_variations,id',
+            
+            // Options (multiple/single free/paid)
+            'products.*.option_groups' => 'array|nullable',
+            'products.*.option_groups.*.option_group_id' => 'required|exists:option_groups,id',
+            'products.*.option_groups.*.options' => 'array|required',
+            'products.*.option_groups.*.options.*' => 'required|exists:options,id',
+            
+            // Addons with different prices for variations
+            'products.*.addon_categories' => 'array|nullable',
+            'products.*.addon_categories.*.addon_category_id' => 'required|exists:addon_categories,id',
+            'products.*.addon_categories.*.addons' => 'array|required',
+            'products.*.addon_categories.*.addons.*' => 'required|exists:addons,id',
+            
+            // Keep meal deals as before
             'meal_deals' => 'array|nullable',
             'meal_deals.*.meal_deal_id' => 'required|exists:meal_deals,id',
             'meal_deals.*.quantity' => 'required|integer|min:1',

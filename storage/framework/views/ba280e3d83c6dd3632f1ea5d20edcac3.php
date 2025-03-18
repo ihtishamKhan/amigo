@@ -18,12 +18,12 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-store"></i>
-                        <span key="t-orders">Orders</span>
+                        <i class="bx bx-users"></i>
+                        <span key="t-users">Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?php echo e(route('orders.index')); ?>" key="t-all-orders">All Orders</a></li>
-                        <li><a href="index" key="t-u-orders">Upcomming Orders</a></li>
+                        <li><a href="<?php echo e(route('users.index')); ?>" key="t-all-orders">All Users</a></li>
+                        <li><a href="index" key="t-u-orders">Create User</a></li>
                     </ul>
                 </li>
 
