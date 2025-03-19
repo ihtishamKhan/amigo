@@ -71,6 +71,61 @@ class OptionsSeeder extends Seeder
                     'is_active' => true
                 ]
             ),
+
+            'dips4oz' => OptionGroup::firstOrCreate(
+                ['name' => 'Dips 4oz'],
+                [
+                    'is_required' => true,
+                    'min_selections' => 0,
+                    'max_selections' => 1, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
+
+            'dips7oz' => OptionGroup::firstOrCreate(
+                ['name' => 'Dips 7oz'],
+                [
+                    'is_required' => true,
+                    'min_selections' => 0,
+                    'max_selections' => 1, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
+
+            'canOfPop' => OptionGroup::firstOrCreate(
+                ['name' => 'Can of Pop'],
+                [
+                    'is_required' => true,
+                    'min_selections' => 0,
+                    'max_selections' => 1, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
+
+            'bottleOfPop' => OptionGroup::firstOrCreate(
+                ['name' => 'Bottle of Pop'],
+                [
+                    'is_required' => true,
+                    'min_selections' => 0,
+                    'max_selections' => 1, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
+
+            'largeBottleOfPop' => OptionGroup::firstOrCreate(
+                ['name' => 'Large Bottle of Pop'],
+                [
+                    'is_required' => true,
+                    'min_selections' => 0,
+                    'max_selections' => 1, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
         ];
 
         // Create options for each crust option group
@@ -165,6 +220,17 @@ class OptionsSeeder extends Seeder
                     'is_active' => true
                 ]
             ),
+            'nachosToppings' => AddonCategory::firstOrCreate(
+                ['name' => 'Nachos Toppings'],
+                [
+                    'display_name' => 'Fancy a little something extra?',
+                    'is_required' => false,
+                    'min_selections' => 0,
+                    'max_selections' => 0, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
         ];
 
         // Create toppings for each size category
@@ -214,6 +280,30 @@ class OptionsSeeder extends Seeder
             $displayOrder++;
         }
 
+        $nachosTopings = [
+            'Bolognese' => 1.00,
+            'Jalapenos' => 1.00,
+            'Pepperoni' => 1.00,
+            'Chicken' => 1.00
+        ];
+
+        $displayOrder = 1;
+        foreach ($nachosTopings as $name => $price) {
+            Addon::firstOrCreate(
+                [
+                    'addon_category_id' => $toppingCategories['nachosToppings']->id,
+                    'name' => $name
+                ],
+                [
+                    'price' => $price,
+                    'is_default' => false,
+                    'display_order' => $displayOrder,
+                    'is_active' => true
+                ]
+            );
+            $displayOrder++;
+        }
+
 
         $sauces = [
             'Chilli Sauce' => 0,
@@ -245,6 +335,120 @@ class OptionsSeeder extends Seeder
             Option::firstOrCreate(
                 [
                     'option_group_id' => $crustOptionsGroups['sides']->id,
+                    'name' => $name
+                ],
+                [
+                    'additional_price' => $data,
+                    'is_default' => false,
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            );
+        }
+
+        $dips4oz = [
+            'Chilli' => 0,
+            'Garlic' => 0,
+            'BBQ' => 0,
+            'Sweet Chilli' => 0,
+            'Ketchup' => 0,
+        ];
+
+        foreach ($dips4oz as $name => $data) {
+            Option::firstOrCreate(
+                [
+                    'option_group_id' => $crustOptionsGroups['dips4oz']->id,
+                    'name' => $name
+                ],
+                [
+                    'additional_price' => $data,
+                    'is_default' => false,
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            );
+        }
+
+        $dips7oz = [
+            'Curry' => 0,
+            'Gravy' => 0,
+            'Mushy Peas' => 0,
+        ];
+
+        foreach ($dips7oz as $name => $data) {
+            Option::firstOrCreate(
+                [
+                    'option_group_id' => $crustOptionsGroups['dips7oz']->id,
+                    'name' => $name
+                ],
+                [
+                    'additional_price' => $data,
+                    'is_default' => false,
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            );
+        }
+
+        $cansOfPop = [
+            'Coke' => 0,
+            'Diet Coke' => 0,
+            'Diet Pepsi' => 0,
+            'Fanta' => 0,
+            '7Up' => 0,
+            'Dr Pepper' => 0,
+        ];
+
+        foreach ($cansOfPop as $name => $data) {
+            Option::firstOrCreate(
+                [
+                    'option_group_id' => $crustOptionsGroups['canOfPop']->id,
+                    'name' => $name
+                ],
+                [
+                    'additional_price' => $data,
+                    'is_default' => false,
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            );
+        }
+
+        $bottlesOfPop = [
+            'Coke' => 0,
+            'Diet Coke' => 0,
+            'Pepsi' => 0,
+            'Diet Pepsi' => 0,
+            '7Up' => 0,
+            'Dr Pepper' => 0,
+        ];
+
+        foreach ($bottlesOfPop as $name => $data) {
+            Option::firstOrCreate(
+                [
+                    'option_group_id' => $crustOptionsGroups['bottleOfPop']->id,
+                    'name' => $name
+                ],
+                [
+                    'additional_price' => $data,
+                    'is_default' => false,
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            );
+        }
+
+        $largeBottlesOfPop = [
+            'Pepsi' => 0,
+            'Diet Pepsi' => 0,
+            'Coke' => 0,
+            'Diet Coke' => 0,
+        ];
+
+        foreach ($largeBottlesOfPop as $name => $data) {
+            Option::firstOrCreate(
+                [
+                    'option_group_id' => $crustOptionsGroups['largeBottleOfPop']->id,
                     'name' => $name
                 ],
                 [

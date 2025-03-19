@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\OptionGroup;
+use App\Models\AddonCategory;
 
 class ProductSeeder extends Seeder
 {
@@ -487,6 +488,474 @@ class ProductSeeder extends Seeder
             }
             
             $product->optionGroups()->sync($sides, ['display_order' => 1]);
+        }
+
+        $burgers = [
+            [
+                'category_id' => 7,
+                'name' => 'BEEF BURGER',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '1/4' => 5.50,
+                    '1/2' => 6.90
+                ]
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'CHEESE BURGER',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '1/4' => 6.50,
+                    '1/2' => 7.90
+                ]
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'CHICKEN BURGER',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '1/4' => 6.50,
+                    '1/2' => 7.90
+                ]
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'HAWAIIAN BURGER',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '1/4' => 6.50,
+                    '1/2' => 7.90
+                ]
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'MEXICAN BURGER',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '1/4' => 6.50,
+                    '1/2' => 7.90
+                ]
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'GEORDIE BURGER',
+                'description' => 'With donner meat, chicken & beef burger',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '1/2' => 8.90
+                ]
+            ]
+        ];
+
+        foreach ($burgers as $index => $burger) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $burger['category_id'],
+                    'name' => $burger['name']
+                ],
+                [
+                    'description' => $burger['description'],
+                    'has_options' => true,
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            if(isset($burger['has_variations'])) {
+                $product->variations()->createMany(
+                    collect($burger['prices'])->map(function ($price, $name) {
+                        return [
+                            'name' => $name,
+                            'price' => $price
+                        ];
+                    })->toArray()
+                );
+            }
+
+            $product->optionGroups()->sync($sides, ['display_order' => 1]);
+        }
+
+        $parmesans = [
+            [
+                'category_id' => 7,
+                'name' => 'CHICKEN PARMESAN',
+                'description' => '',
+                'price' => 9.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'BBQ PARMESAN',
+                'description' => '',
+                'price' => 10.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'PEPPERONI PARMESAN',
+                'description' => '',
+                'price' => 10.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'KIEV PARMESAN',
+                'description' => 'Garlic, mushroom & onions',
+                'price' => 10.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'HOT & SPICY PARMESAN',
+                'description' => 'Chilli, bolognese & jalapenos',
+                'price' => 10.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+        ];
+
+        foreach ($parmesans as $index => $parmesan) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $parmesan['category_id'],
+                    'name' => $parmesan['name']
+                ],
+                [
+                    'description' => $parmesan['description'],
+                    'price' => $parmesan['price'],
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            $product->optionGroups()->sync($sides, ['display_order' => 1]);
+            $product->optionGroups()->sync($sauces, ['display_order' => 2]);
+        }
+
+        $nachos = [
+            [
+                'category_id' => 8,
+                'name' => 'CHEESE NACHOS',
+                'description' => '',
+                'price' => 6.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 8,
+                'name' => 'CHEESE & BOLOGNESE NACHOS',
+                'description' => '',
+                'price' => 7.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 8,
+                'name' => 'CHEESE & PEPPERONI NACHOS',
+                'description' => '',
+                'price' => 7.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 8,
+                'name' => 'CHEESE & JALAPENOOS NACHOS',
+                'description' => '',
+                'price' => 7.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 8,
+                'name' => 'CHEESE & CHICKEN NACHOS',
+                'description' => '',
+                'price' => 7.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+        ];
+
+        $toppingCategories = AddonCategory::get(); 
+        foreach ($nachos as $index => $nacho) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $nacho['category_id'],
+                    'name' => $nacho['name']
+                ],
+                [
+                    'description' => $nacho['description'],
+                    'price' => $nacho['price'],
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            $product->addonCategories()->attach($toppingCategories->where('name', 'Nachos Toppings')->first()->id);
+        }
+
+        $sundries = [
+            [
+                'category_id' => 9,
+                'name' => 'KEBAB BUTTY',
+                'description' => '',
+                'price' => 5.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'CHICKEN NUGGETS & CHIPS (8pc)',
+                'description' => '',
+                'price' => 5.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'ONION RINGS (10pc)',
+                'description' => '',
+                'price' => 3.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'POTATO WEDGES',
+                'description' => '',
+                'price' => 4.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'POTATO WEDGES, CHEESE & SAUCE',
+                'description' => '',
+                'price' => 5.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'GARLIC MUSHROOM & CHEESE',
+                'description' => '',
+                'price' => 4.80,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'MOZZARELLA STICKS (6pc)',
+                'description' => '',
+                'price' => 4.60,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'JALAPENO STICKS (6pc)',
+                'description' => '',
+                'price' => 4.60,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'CURLEY FRIES',
+                'description' => '',
+                'price' => 4.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'SALAD',
+                'description' => '',
+                'price' => 2.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'PITTA BREAD / TORTILLA / BREAD BUN',
+                'description' => '',
+                'price' => 0.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'SOUTHERN FRIED CHICKEN & CHIPS',
+                'description' => '',
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_variations' => true,
+                'prices' => [
+                    '2pc' => 7.90,
+                    '4pc' => 9.90
+                ]
+            ]
+        ];
+
+        foreach ($sundries as $index => $sundry) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $sundry['category_id'],
+                    'name' => $sundry['name']
+                ],
+                [
+                    'description' => $sundry['description'],
+                    'price' => $sundry['price'] ?? null,
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            if(isset($sundry['has_variations'])) {
+                $product->variations()->createMany(
+                    collect($sundry['prices'])->map(function ($price, $name) {
+                        return [
+                            'name' => $name,
+                            'price' => $price
+                        ];
+                    })->toArray()
+                );
+            }
+        }
+
+        $dips = [
+            [
+                'category_id' => 10,
+                'name' => 'Dips (4oz)',
+                'description' => '',
+                'price' => 1.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 10,
+                'name' => 'Dips (7oz)',
+                'description' => '',
+                'price' => 1.40,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+        ];
+
+        $dips4ozOptionGroup = OptionGroup::where('name', 'Dips 4oz')->first();
+        $dips7ozOptionGroup = OptionGroup::where('name', 'Dips 7oz')->first();
+
+        foreach ($dips as $index => $dip) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $dip['category_id'],
+                    'name' => $dip['name']
+                ],
+                [
+                    'description' => $dip['description'],
+                    'price' => $dip['price'],
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            $product->optionGroups()->sync($dip['name'] === 'Dips (4oz)' ? $dips4ozOptionGroup : $dips7ozOptionGroup);
+        }
+
+        $drinks = [
+            [
+                'category_id' => 11,
+                'name' => 'Can of Pop',
+                'description' => '',
+                'price' => 1.20,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_options' => true,
+            ],
+            [
+                'category_id' => 11,
+                'name' => 'Bottle of Pop (500ml)',
+                'description' => '',
+                'price' => 2.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_options' => true,
+            ],
+            [
+                'category_id' => 11,
+                'name' => 'Large Bottle of Pop',
+                'description' => '',
+                'price' => 3.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_options' => true,
+            ],
+            [
+                'category_id' => 11,
+                'name' => 'Water / Fruit Shoot',
+                'description' => '',
+                'price' => 0.80,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_options' => false,
+            ],
+            [
+                'category_id' => 11,
+                'name' => 'Monster',
+                'description' => '',
+                'price' => 2.00,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+                'has_options' => false,
+            ],
+        ];
+
+        $canOfPopOptionGroup = OptionGroup::where('name', 'Can of Pop')->first();
+        $bottleOfPopOptionGroup = OptionGroup::where('name', 'Bottle of Pop')->first();
+        $largeBottleOfPopOptionGroup = OptionGroup::where('name', 'Large Bottle of Pop')->first();
+
+        foreach ($drinks as $index => $drink) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $drink['category_id'],
+                    'name' => $drink['name']
+                ],
+                [
+                    'description' => $drink['description'],
+                    'price' => $drink['price'],
+                    'is_featured' => $index === 0,
+                ]
+            );
+
+            if($drink['has_options']) {
+                $product->optionGroups()->sync($drink['name'] === 'Can of Pop' ? $canOfPopOptionGroup : ($drink['name'] === 'Bottle of Pop (500ml)' ? $bottleOfPopOptionGroup : $largeBottleOfPopOptionGroup));
+            }
+
+        }
+
+        $drinks = [
+            [
+                'category_id' => 12,
+                'name' => 'Cheese Cake',
+                'description' => '',
+                'price' => 2.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 12,
+                'name' => 'Chocolate Cake',
+                'description' => '',
+                'price' => 2.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 12,
+                'name' => 'Fudge Cake',
+                'description' => '',
+                'price' => 2.50,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 12,
+                'name' => 'Ben & Jerry\'s Ice Cream (500ml)',
+                'description' => '',
+                'price' => 5.90,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+        ];
+
+        foreach ($drinks as $index => $drink) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $drink['category_id'],
+                    'name' => $drink['name']
+                ],
+                [
+                    'description' => $drink['description'],
+                    'price' => $drink['price'],
+                    'is_featured' => $index === 0,
+                ]
+            );
         }
     }
 }
