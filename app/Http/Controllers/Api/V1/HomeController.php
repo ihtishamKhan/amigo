@@ -86,19 +86,20 @@ class HomeController extends Controller
             ->when($categoryId, function ($query) use ($categoryId) {
                 return $query->where('category_id', $categoryId);
             })
-            ->paginate(10);
+            ->get();
+            // ->paginate(10);
 
             return response()->json([
                 'meal_deals' => $mealDeals,
                 'categories' => CategoryResource::collection($categories),
                 'products' => ProductResource::collection($products),
-                'pagination' => [
-                    'current_page' => $products->currentPage(),
-                    'per_page' => $products->perPage(),
-                    'total' => $products->total(),
-                    'last_page' => $products->lastPage(),
-                    'has_more' => $products->hasMorePages()
-                ]
+                // 'pagination' => [
+                //     'current_page' => $products->currentPage(),
+                //     'per_page' => $products->perPage(),
+                //     'total' => $products->total(),
+                //     'last_page' => $products->lastPage(),
+                //     'has_more' => $products->hasMorePages()
+                // ]
             ]);
         });
     }
