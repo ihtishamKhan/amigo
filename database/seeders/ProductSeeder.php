@@ -587,35 +587,35 @@ class ProductSeeder extends Seeder
 
         $parmesans = [
             [
-                'category_id' => 7,
+                'category_id' => 8,
                 'name' => 'CHICKEN PARMESAN',
                 'description' => '',
                 'price' => 9.90,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 7,
+                'category_id' => 8,
                 'name' => 'BBQ PARMESAN',
                 'description' => '',
                 'price' => 10.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 7,
+                'category_id' => 8,
                 'name' => 'PEPPERONI PARMESAN',
                 'description' => '',
                 'price' => 10.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 7,
+                'category_id' => 8,
                 'name' => 'KIEV PARMESAN',
                 'description' => 'Garlic, mushroom & onions',
                 'price' => 10.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 7,
+                'category_id' => 8,
                 'name' => 'HOT & SPICY PARMESAN',
                 'description' => 'Chilli, bolognese & jalapenos',
                 'price' => 10.50,
@@ -642,35 +642,35 @@ class ProductSeeder extends Seeder
 
         $nachos = [
             [
-                'category_id' => 8,
+                'category_id' => 9,
                 'name' => 'CHEESE NACHOS',
                 'description' => '',
                 'price' => 6.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 8,
+                'category_id' => 9,
                 'name' => 'CHEESE & BOLOGNESE NACHOS',
                 'description' => '',
                 'price' => 7.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 8,
+                'category_id' => 9,
                 'name' => 'CHEESE & PEPPERONI NACHOS',
                 'description' => '',
                 'price' => 7.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 8,
+                'category_id' => 9,
                 'name' => 'CHEESE & JALAPENOOS NACHOS',
                 'description' => '',
                 'price' => 7.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 8,
+                'category_id' => 9,
                 'name' => 'CHEESE & CHICKEN NACHOS',
                 'description' => '',
                 'price' => 7.50,
@@ -697,84 +697,84 @@ class ProductSeeder extends Seeder
 
         $sundries = [
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'KEBAB BUTTY',
                 'description' => '',
                 'price' => 5.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'CHICKEN NUGGETS & CHIPS (8pc)',
                 'description' => '',
                 'price' => 5.90,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'ONION RINGS (10pc)',
                 'description' => '',
                 'price' => 3.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'POTATO WEDGES',
                 'description' => '',
                 'price' => 4.90,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'POTATO WEDGES, CHEESE & SAUCE',
                 'description' => '',
                 'price' => 5.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'GARLIC MUSHROOM & CHEESE',
                 'description' => '',
                 'price' => 4.80,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'MOZZARELLA STICKS (6pc)',
                 'description' => '',
                 'price' => 4.60,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'JALAPENO STICKS (6pc)',
                 'description' => '',
                 'price' => 4.60,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'CURLEY FRIES',
                 'description' => '',
                 'price' => 4.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'SALAD',
                 'description' => '',
                 'price' => 2.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'PITTA BREAD / TORTILLA / BREAD BUN',
                 'description' => '',
                 'price' => 0.90,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 9,
+                'category_id' => 10,
                 'name' => 'SOUTHERN FRIED CHICKEN & CHIPS',
                 'description' => '',
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
@@ -813,14 +813,14 @@ class ProductSeeder extends Seeder
 
         $dips = [
             [
-                'category_id' => 10,
+                'category_id' => 11,
                 'name' => 'Dips (4oz)',
                 'description' => '',
                 'price' => 1.00,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 10,
+                'category_id' => 11,
                 'name' => 'Dips (7oz)',
                 'description' => '',
                 'price' => 1.40,
@@ -849,7 +849,7 @@ class ProductSeeder extends Seeder
 
         $drinks = [
             [
-                'category_id' => 11,
+                'category_id' => 12,
                 'name' => 'Can of Pop',
                 'description' => '',
                 'price' => 1.20,
@@ -857,7 +857,7 @@ class ProductSeeder extends Seeder
                 'has_options' => true,
             ],
             [
-                'category_id' => 11,
+                'category_id' => 12,
                 'name' => 'Bottle of Pop (500ml)',
                 'description' => '',
                 'price' => 2.00,
@@ -865,7 +865,7 @@ class ProductSeeder extends Seeder
                 'has_options' => true,
             ],
             [
-                'category_id' => 11,
+                'category_id' => 12,
                 'name' => 'Large Bottle of Pop',
                 'description' => '',
                 'price' => 3.00,
@@ -873,7 +873,7 @@ class ProductSeeder extends Seeder
                 'has_options' => true,
             ],
             [
-                'category_id' => 11,
+                'category_id' => 12,
                 'name' => 'Water / Fruit Shoot',
                 'description' => '',
                 'price' => 0.80,
@@ -881,7 +881,7 @@ class ProductSeeder extends Seeder
                 'has_options' => false,
             ],
             [
-                'category_id' => 11,
+                'category_id' => 12,
                 'name' => 'Monster',
                 'description' => '',
                 'price' => 2.00,
@@ -915,28 +915,28 @@ class ProductSeeder extends Seeder
 
         $drinks = [
             [
-                'category_id' => 12,
+                'category_id' => 13,
                 'name' => 'Cheese Cake',
                 'description' => '',
                 'price' => 2.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 12,
+                'category_id' => 13,
                 'name' => 'Chocolate Cake',
                 'description' => '',
                 'price' => 2.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 12,
+                'category_id' => 13,
                 'name' => 'Fudge Cake',
                 'description' => '',
                 'price' => 2.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
-                'category_id' => 12,
+                'category_id' => 13,
                 'name' => 'Ben & Jerry\'s Ice Cream (500ml)',
                 'description' => '',
                 'price' => 5.90,
