@@ -67,8 +67,8 @@ class HomeController extends Controller
             // These don't need pagination
             $mealDeals = MealDealListResource::collection(
                 MealDeal::active()
-                    ->with('products')  // Eager load products
-                    ->take(5)
+                    ->with(['sections', 'sections.items'])
+                    ->take(10)
                     ->get()
             );
 

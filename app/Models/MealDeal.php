@@ -4,20 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class MealDeal extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
     // Define the active scope
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
-    public function products()
+    public function sections()
     {
-        return $this->belongsToMany(Product::class, 'meal_deal_products');
+        return $this->hasMany(MealDealSection::class);
+    }
+    
+    public function orderItems()
+    {
+        return $this->morphMany(OrderItem::class, 'orderable');
     }
 
     public function getImageUrlAttribute()

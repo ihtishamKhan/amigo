@@ -138,9 +138,11 @@ class OrderService
 
         // Calculate meal deals subtotal
         if (!empty($data['meal_deals'])) {
-            foreach ($data['meal_deals'] as $item) {
-                $mealDeal = MealDeal::findOrFail($item['meal_deal_id']);
-                $subtotal += $mealDeal->price * $item['quantity'];
+            foreach ($data['meal_deals'] as $mealDealData) {
+                $mealDeal = MealDeal::findOrFail($mealDealData['meal_deal_id']);
+                $subtotal += $mealDeal->price * $mealDealData['quantity'];
+                
+                // No additional price calculations needed here since meal deals have fixed prices
             }
         }
 
@@ -236,19 +238,62 @@ class OrderService
             }
         }
 
-        // Process meal deals (keeping existing logic)
+        // Process meal deals with selections
         if (!empty($data['meal_deals'])) {
-            foreach ($data['meal_deals'] as $item) {
-                $mealDeal = MealDeal::findOrFail($item['meal_deal_id']);
-                $itemSubtotal = $mealDeal->price * $item['quantity'];
-
-                $order->orderItems()->create([
+            foreach ($data['meal_deals'] as $mealDealData) {
+                $mealDeal = MealDeal::findOrFail($mealDealData['meal_deal_id']);
+                
+                // Create the order item for this meal deal
+                $orderItem = $order->orderItems()->create([
                     'orderable_id' => $mealDeal->id,
                     'orderable_type' => MealDeal::class,
-                    'quantity' => $item['quantity'],
+                    'quantity' => $mealDealData['quantity'],
                     'unit_price' => $mealDeal->price,
-                    'subtotal' => $itemSubtotal
+                    'subtotal' => $mealDeal->price * $mealDealData['quantity']
                 ]);
+                
+                // Store the selected items for each section
+                if (!empty($mealDealData['sections'])) {
+                    foreach ($mealDealData['sections'] as $sectionData) {
+                        $section = $mealDeal->sections()->findOrFail($sectionData['section_id']);
+                        
+                        foreach ($sectionData['items'] as $itemData) {
+                            // Get reference item details based on reference_type
+                            $referenceName = '';
+                            $referencePrice = 0.00;
+                            
+                            switch ($itemData['reference_type']) {
+                                case 'product':
+                                    $reference = Product::findOrFail($itemData['reference_id']);
+                                    $referenceName = $reference->name;
+                                    break;
+                                    
+                                case 'variation':
+                                    $reference = ProductVariation::findOrFail($itemData['reference_id']);
+                                    $referenceName = $reference->name;
+                                    break;
+                                    
+                                case 'option':
+                                    $reference = Option::findOrFail($itemData['reference_id']);
+                                    $referenceName = $reference->name;
+                                    break;
+                            }
+                            
+                            // Record the selected meal deal item
+                            DB::table('order_meal_deal_items')->insert([
+                                'order_item_id' => $orderItem->id,
+                                'meal_deal_section_id' => $section->id,
+                                'reference_type' => $itemData['reference_type'],
+                                'reference_id' => $itemData['reference_id'],
+                                'name' => $referenceName,
+                                'price' => $referencePrice,
+                                'quantity' => $itemData['quantity'] ?? 1,
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]);
+                        }
+                    }
+                }
             }
         }
     }

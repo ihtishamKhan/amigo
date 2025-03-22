@@ -27,6 +27,13 @@ class DatabaseSeeder extends Seeder
             AddressSeeder::class,
             CustomersSeeder::class,
             MealDealSeeder::class,
+            MealDeal2Seeder::class,
+            MealDeal3Seeder::class,
+            MealDeal4Seeder::class,
+            MealDeal5Seeder::class,
+            MealDeal6Seeder::class,
+            MealDealFamilyOfferSeeder::class,
+            MealDealBoxSpecialSeeder::class,
         ]);
     }
 }

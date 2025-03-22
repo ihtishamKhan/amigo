@@ -18,6 +18,8 @@ abstract class BaseMealDealResource extends JsonResource
                 'formatted' => "£{$this->price}"
             ],
             'image' => $this->image_url,
+            'is_active' => $this->is_active,
+            'display_order' => $this->display_order,
         ];
     }
 }
