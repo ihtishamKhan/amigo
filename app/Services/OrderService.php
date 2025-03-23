@@ -34,13 +34,20 @@ class OrderService
                 : 0;
             $total = $subtotal + $deliveryFee;
 
-            // Create Stripe Payment Intent
-            $paymentIntent = $this->stripeService->createPaymentIntent(
-                $total,
-                'gbp', // or your currency
-                $data['payment_method'],
-                $data['payment_method_id']
-            );
+            if(env('APP_ENV') !== 'local') {
+                // Create Stripe Payment Intent
+                $paymentIntent = $this->stripeService->createPaymentIntent(
+                    $total,
+                    'gbp', // or your currency
+                    $data['payment_method'],
+                    $data['payment_method_id']
+                );
+            } else {
+                $paymentIntent = (object) [
+                    'id' => 'fake_payment_intent_id',
+                    'client_secret' => 'fake_client_secret',
+                ];
+            }
 
             // Handle guest vs authenticated user
             $orderData = [

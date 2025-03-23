@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\OptionGroup;
 use App\Models\AddonCategory;
+use App\Models\ProductVariation;
 
 class ProductSeeder extends Seeder
 {
@@ -141,6 +142,7 @@ class ProductSeeder extends Seeder
                     'name' => $kebab['name']
                 ],
                 [
+                    'price' => $kebab['price'],
                     'description' => $kebab['description'],
                     'has_options' => true,
                     'is_featured' => $index === 0,
@@ -256,6 +258,7 @@ class ProductSeeder extends Seeder
                     'name' => $wrap['name']
                 ],
                 [
+                    'price' => $wrap['price'],
                     'description' => $wrap['description'],
                     'has_options' => true,
                     'is_featured' => $index === 0,
@@ -305,6 +308,7 @@ class ProductSeeder extends Seeder
                     'name' => $mexican['name']
                 ],
                 [
+                    'price' => $mexican['price'],
                     'description' => $mexican['description'],
                     'has_options' => true,
                     'is_featured' => $index === 0,
@@ -477,6 +481,7 @@ class ProductSeeder extends Seeder
                     'name' => $fAndC['name']
                 ],
                 [
+                    'price' => isset($fAndC['price']) ? $fAndC['price'] : null,
                     'description' => $fAndC['description'],
                     'has_options' => true,
                     'is_featured' => $index === 0,
@@ -566,20 +571,27 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'description' => $burger['description'],
+                    'has_variations' => true,
                     'has_options' => true,
                     'is_featured' => $index === 0,
                 ]
             );
 
             if(isset($burger['has_variations'])) {
-                $product->variations()->createMany(
-                    collect($burger['prices'])->map(function ($price, $name) {
-                        return [
-                            'name' => $name,
-                            'price' => $price
-                        ];
-                    })->toArray()
-                );
+                foreach ($burger['prices'] as $name => $price) {
+                    $variation = ProductVariation::firstOrCreate(
+                        [
+                            'product_id' => $product->id,
+                            'name' => $name
+                        ],
+                        [
+                            'price' => $price,
+                            'is_default' => $name === '1/4',
+                            'display_order' => 1,
+                            'is_active' => true,
+                        ]
+                    );
+                }
             }
 
             $product->optionGroups()->sync($sides, ['display_order' => 1]);
