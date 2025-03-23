@@ -969,5 +969,50 @@ class ProductSeeder extends Seeder
                 ]
             );
         }
+
+        $kidsMeal = [
+            [
+                'category_id' => 14,
+                'name' => '8” Margherita',
+                'description' => '',
+                'price' => 4.80,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 14,
+                'name' => 'Chicken Nuggets (4pc)',
+                'description' => '',
+                'price' => 4.80,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 14,
+                'name' => 'Onion Rings (6pc)',
+                'description' => '',
+                'price' => 4.80,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+            [
+                'category_id' => 14,
+                'name' => 'Sausage',
+                'description' => '',
+                'price' => 4.80,
+                'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
+            ],
+        ];
+
+        foreach ($kidsMeal as $index => $meal) {
+            $product = Product::firstOrCreate(
+                [
+                    'category_id' => $meal['category_id'],
+                    'name' => $meal['name']
+                ],
+                [
+                    'description' => $meal['description'],
+                    'price' => $meal['price'],
+                    'is_featured' => $index === 0,
+                ]
+            );
+        }
     }
 }
