@@ -301,6 +301,9 @@
                                             @endif
 
                                             @if ($item->orderable_type === 'App\Models\MealDeal')
+                                                {{-- @php
+                                                    dd($item->mealDealItems);
+                                                @endphp --}}
                                                 <!-- Meal Deal Selections -->
                                                 @if ($item->mealDealItems->count() > 0)
                                                     <div>

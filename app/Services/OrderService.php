@@ -264,7 +264,7 @@ class OrderService
                     foreach ($mealDealData['sections'] as $sectionData) {
                         $section = $mealDeal->sections()->findOrFail($sectionData['section_id']);
                         
-                        foreach ($sectionData['items'] as $itemData) {
+                        foreach ($sectionData['selections'] as $itemData) {
                             // Get reference item details based on reference_type
                             $referenceName = '';
                             $referencePrice = 0.00;

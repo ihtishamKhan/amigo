@@ -47,6 +47,10 @@ class CreateOrderRequest extends FormRequest
             'meal_deals' => 'array|nullable',
             'meal_deals.*.meal_deal_id' => 'required|exists:meal_deals,id',
             'meal_deals.*.quantity' => 'required|integer|min:1',
+            'meal_deals.*.sections' => 'required|array',
+            'meal_deals.*.sections.*.section_id' => 'required|exists:meal_deal_sections,id',
+            'meal_deals.*.sections.*.selections' => 'required|array',
+            // 'meal_deals.*.sections.*.selections.*' => 'required|exists:meal_deal_items,id',
         ];
 
         // Add guest-specific rules if not authenticated

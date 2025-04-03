@@ -311,6 +311,7 @@
                                             <?php endif; ?>
 
                                             <?php if($item->orderable_type === 'App\Models\MealDeal'): ?>
+                                                
                                                 <!-- Meal Deal Selections -->
                                                 <?php if($item->mealDealItems->count() > 0): ?>
                                                     <div>
