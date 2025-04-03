@@ -190,16 +190,19 @@
                                     <td>£{{ $order->total }}</td>
                                     <td>
                                         @if ($order->status == 'created')
-                                            <span class="badge bg-success">Created</span>
+                                            <span class="badge bg-warning">Created</span>
                                         @elseif ($order->status == 'preparing')
                                             <span class="badge bg-warning">Preparing</span>
-                                        @else
-                                            <span class="badge bg-danger">Delivered</span>
+                                        @elseif ($order->status == 'cancelled')
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        @elseif ($order->status == 'completed')
+                                            <span class="badge bg-success">Completed</span>
+                                        @elseif ($order->status == 'delivered')
+                                            <span class="badge bg-success">Delivered</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#view-order-{{ $order->id }}" class="btn btn-info btn-sm">
+                                        <a href="{{ route('orders.show', $order->uuid) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
 

@@ -38,11 +38,57 @@ class HomeController extends Controller
     public function root()
     {
         $total_orders = Order::count();
-        $delivered_orders = Order::where('status', 'Delivered')->count();
-        $cacelled_orders = Order::where('status', 'Cancelled')->count();
-        $revenue = Order::where('status', 'Delivered')->sum('total');
+        $completed_orders = Order::where('status', 'completed')->count();
+        $cancelled_orders = Order::where('status', 'Cancelled')->count();
+        $revenue = Order::where('status', 'completed')->sum('total');
 
-        return view('index', compact('total_orders', 'delivered_orders', 'cacelled_orders', 'revenue'));
+        // Prepare data for the last 7 days chart
+        $dates = [];
+        $orders_data = [];
+        $delivered_data = [];
+        $cancelled_data = [];
+
+        // Generate the last 7 days dates
+        for ($i = 6; $i >= 0; $i--) {
+            $date = \Carbon\Carbon::now()->subDays($i)->format('Y-m-d');
+            $dates[] = \Carbon\Carbon::now()->subDays($i)->format('M d'); // Format: Jan 01
+        }
+
+        // Count orders by status for each day
+        foreach ($dates as $index => $formatted_date) {
+            $date = \Carbon\Carbon::now()->subDays(6 - $index)->format('Y-m-d');
+            
+            // Count all orders for this day
+            $orders_data[] = Order::whereDate('created_at', $date)->count();
+            
+            // Count completed orders for this day
+            $completed_data[] = Order::whereDate('created_at', $date)
+                ->where('status', 'completed')
+                ->count();
+            
+            // Count cancelled orders for this day
+            $cancelled_data[] = Order::whereDate('created_at', $date)
+                ->where('status', 'cancelled')
+                ->count();
+        }
+
+        // Convert data to JSON for JavaScript
+        $chart_data = [
+            'dates' => $dates,
+            'orders' => $orders_data,
+            'completed' => $completed_data,
+            'cancelled' => $cancelled_data
+        ];
+
+        // dd($chart_data);
+
+        return view('index', compact(
+            'total_orders', 
+            'completed_orders', 
+            'cancelled_orders', 
+            'revenue', 
+            'chart_data'
+        ));
     }
 
     /*Language Translation*/

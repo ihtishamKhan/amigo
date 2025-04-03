@@ -18,9 +18,61 @@ class OrderController extends Controller
     
     public function index()
     {
-        $orders = Order::with(['orderItems', 'user'])->latest()->get();
+        $orders = Order::with(['orderItems.orderable', 'user'])->latest()->get();
 
         return view('admin.orders.index', compact('orders'));
+    }
+
+    public function show($uuid)
+    {
+        $order = Order::with([
+            'orderItems.orderable',
+            'orderItems.productVariation',
+            'orderItems.orderItemOptions.optionGroup',
+            'orderItems.orderItemAddons.addonCategory',
+            'orderItems.mealDealItems.section',
+            'user'
+        ])->where('uuid', $uuid)->first();
+
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $order = Order::findOrFail($id);
+            
+            // Validate the status
+            $request->validate([
+                'status' => 'required|in:created,in-progress,completed',
+            ]);
+            
+            // Update the order status
+            $order->status = $request->status;
+            $order->save();
+            
+            return redirect()->back()->with('success', 'Order status updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update order status: ' . $e->getMessage());
+        }
+    }
+
+    public function cancelOrder($id)
+    {
+        try {
+            $order = Order::findOrFail($id);
+            
+            // Update the order status to cancelled
+            $order->status = 'cancelled';
+            $order->save();
+            
+            // Optional: You may want to perform additional actions here
+            // such as refunding payment, updating inventory, etc.
+            
+            return redirect()->back()->with('success', 'Order has been cancelled successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to cancel order: ' . $e->getMessage());
+        }
     }
 
     public function printReceipt()

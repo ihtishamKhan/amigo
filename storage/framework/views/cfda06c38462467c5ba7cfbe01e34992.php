@@ -88,16 +88,19 @@
                                     <td>£<?php echo e($order->total); ?></td>
                                     <td>
                                         <?php if($order->status == 'created'): ?>
-                                            <span class="badge bg-success">Created</span>
+                                            <span class="badge bg-warning">Created</span>
                                         <?php elseif($order->status == 'preparing'): ?>
                                             <span class="badge bg-warning">Preparing</span>
-                                        <?php else: ?>
-                                            <span class="badge bg-danger">Delivered</span>
+                                        <?php elseif($order->status == 'cancelled'): ?>
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        <?php elseif($order->status == 'completed'): ?>
+                                            <span class="badge bg-success">Completed</span>
+                                        <?php elseif($order->status == 'delivered'): ?>
+                                            <span class="badge bg-success">Delivered</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#view-order-<?php echo e($order->id); ?>" class="btn btn-info btn-sm">
+                                        <a href="<?php echo e(route('orders.show', $order->uuid)); ?>" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
 
@@ -513,4 +516,4 @@ unset($__errorArgs, $__bag); ?>
     <script src="<?php echo e(URL::asset('/assets/js/pages/datatables.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\installed-application\laragon\www\amigo\resources\views/admin/orders/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\installed-application\laragon\www\amigo\resources\views/admin/orders/index.blade.php ENDPATH**/ ?>

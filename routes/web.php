@@ -24,9 +24,12 @@ Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => 'auth'], 
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::get('/create', [OrderController::class, 'create'])->name('create');
     Route::post('/store', [OrderController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [OrderController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [OrderController::class, 'destroy'])->name('delete');
+    Route::patch('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('update-status');
+    Route::patch('/orders/{id}/cancel', [OrderController::class, 'cancelOrder'])->name('cancel');
 
     Route::get('/receipt/{id}', [OrderController::class, 'printReceipt'])->name('printReceipt');
 });

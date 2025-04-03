@@ -13,7 +13,7 @@ class OrderItem extends Model
 
     protected $fillable = [
         'order_id', 'orderable_id', 'orderable_type', 
-        'quantity', 'unit_price', 'subtotal'
+        'quantity', 'unit_price', 'subtotal', 'product_variation_id'
     ];
 
     /**
@@ -67,5 +67,11 @@ class OrderItem extends Model
     public function isMealDeal(): bool
     {
         return $this->orderable_type === MealDeal::class;
+    }
+
+    // Meal deal selections (if this is a meal deal)
+    public function mealDealItems()
+    {
+        return $this->hasMany(OrderMealDealItem::class);
     }
 }

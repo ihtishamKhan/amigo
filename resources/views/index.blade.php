@@ -42,8 +42,8 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <p class="text-muted fw-medium">Delivered</p>
-                                    <h4 class="mb-0">{{ $delivered_orders }}</h4>
+                                    <p class="text-muted fw-medium">Completed</p>
+                                    <h4 class="mb-0">{{ $completed_orders }}</h4>
                                 </div>
 
                                 <div class="flex-shrink-0 align-self-center">
@@ -63,7 +63,7 @@
                             <div class="d-flex">
                                 <div class="flex-grow-1">
                                     <p class="text-muted fw-medium">Canceled</p>
-                                    <h4 class="mb-0">{{ $cacelled_orders }}</h4>
+                                    <h4 class="mb-0">{{ $cancelled_orders }}</h4>
                                 </div>
 
                                 <div class="flex-shrink-0 align-self-center">
@@ -116,10 +116,12 @@
 @section('script')
     <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-    <!-- dashboard init -->
-    {{-- <script src="{{ URL::asset('build/js/pages/dashboard.init.js') }}"></script> --}}
 
     <script>
+        // Add this in your blade template
+        var chartData = @json($chart_data);
+        console.log(chartData);
+
         function getChartColorsArray(chartId) {
             if (document.getElementById(chartId) !== null) {
                 var colors = document.getElementById(chartId).getAttribute("data-colors");
@@ -176,16 +178,16 @@
                 },
                 series: [{
                     name: 'Orders',
-                    data: [44, 55, 41, 67, 22, 43, 36, 52, 24, 18, 36, 48]
+                    data: chartData.orders
                 }, {
-                    name: 'Delivered',
-                    data: [13, 23, 20, 8, 13, 27, 18, 22, 10, 16, 24, 22]
+                    name: 'Completed',
+                    data: chartData.completed
                 }, {
-                    name: 'Canceled',
-                    data: [11, 17, 15, 15, 21, 14, 11, 18, 17, 12, 20, 18]
+                    name: 'Cancelled',
+                    data: chartData.cancelled
                 }],
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    categories: chartData.dates,
                 },
                 colors: linechartBasicColors,
                 legend: {

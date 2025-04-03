@@ -42,8 +42,8 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <p class="text-muted fw-medium">Delivered</p>
-                                    <h4 class="mb-0"><?php echo e($delivered_orders); ?></h4>
+                                    <p class="text-muted fw-medium">Completed</p>
+                                    <h4 class="mb-0"><?php echo e($completed_orders); ?></h4>
                                 </div>
 
                                 <div class="flex-shrink-0 align-self-center">
@@ -63,7 +63,7 @@
                             <div class="d-flex">
                                 <div class="flex-grow-1">
                                     <p class="text-muted fw-medium">Canceled</p>
-                                    <h4 class="mb-0"><?php echo e($cacelled_orders); ?></h4>
+                                    <h4 class="mb-0"><?php echo e($cancelled_orders); ?></h4>
                                 </div>
 
                                 <div class="flex-shrink-0 align-self-center">
@@ -116,10 +116,12 @@
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(URL::asset('build/libs/apexcharts/apexcharts.min.js')); ?>"></script>
 
-    <!-- dashboard init -->
-    
 
     <script>
+        // Add this in your blade template
+        var chartData = <?php echo json_encode($chart_data, 15, 512) ?>;
+        console.log(chartData);
+
         function getChartColorsArray(chartId) {
             if (document.getElementById(chartId) !== null) {
                 var colors = document.getElementById(chartId).getAttribute("data-colors");
@@ -176,16 +178,16 @@
                 },
                 series: [{
                     name: 'Orders',
-                    data: [44, 55, 41, 67, 22, 43, 36, 52, 24, 18, 36, 48]
+                    data: chartData.orders
                 }, {
-                    name: 'Delivered',
-                    data: [13, 23, 20, 8, 13, 27, 18, 22, 10, 16, 24, 22]
+                    name: 'Completed',
+                    data: chartData.completed
                 }, {
-                    name: 'Canceled',
-                    data: [11, 17, 15, 15, 21, 14, 11, 18, 17, 12, 20, 18]
+                    name: 'Cancelled',
+                    data: chartData.cancelled
                 }],
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    categories: chartData.dates,
                 },
                 colors: linechartBasicColors,
                 legend: {
@@ -206,4 +208,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\installed-application\laragon\www\amigo\resources\views/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\installed-application\laragon\www\amigo\resources\views/index.blade.php ENDPATH**/ ?>

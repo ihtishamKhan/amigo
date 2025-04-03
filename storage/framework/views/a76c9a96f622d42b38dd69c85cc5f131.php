@@ -5,19 +5,23 @@
             <div class="navbar-brand-box">
                 <a href="index" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="<?php echo e(URL::asset('build/images/logo.svg')); ?>" alt="" height="22">
+                        
+                        <p style="color: white; font-size: 20px;font-weight:bold;">Amigo</p>
                     </span>
                     <span class="logo-lg">
-                        <img src="<?php echo e(URL::asset('build/images/logo-dark.png')); ?>" alt="" height="17">
+                        
+                        <p style="color: white; font-size: 20px;font-weight:bold;">Amigo</p>
                     </span>
                 </a>
 
                 <a href="index" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="<?php echo e(URL::asset('build/images/logo-light.svg')); ?>" alt="" height="22">
+                        
+                        <p style="color: white; font-size: 20px;font-weight:bold;">Amigo</p>
                     </span>
                     <span class="logo-lg">
-                        <img src="<?php echo e(URL::asset('build/images/logo-light.png')); ?>" alt="" height="19">
+                        
+                        <p style="color: white; font-size: 20px;font-weight:bold;">Amigo</p>
                     </span>
                 </a>
             </div>
