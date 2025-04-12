@@ -563,6 +563,8 @@ class ProductSeeder extends Seeder
             ]
         ];
 
+        $burger_options = OptionGroup::where('name', 'Burger Options')->first();
+
         foreach ($burgers as $index => $burger) {
             $product = Product::firstOrCreate(
                 [
@@ -594,7 +596,7 @@ class ProductSeeder extends Seeder
                 }
             }
 
-            $product->optionGroups()->sync($sides, ['display_order' => 1]);
+            $product->optionGroups()->sync($burger_options, ['display_order' => 1]);
         }
 
         $parmesans = [
@@ -648,8 +650,8 @@ class ProductSeeder extends Seeder
                 ]
             );
 
-            $product->optionGroups()->sync($sides, ['display_order' => 1]);
-            $product->optionGroups()->sync($sauces, ['display_order' => 2]);
+            $product->optionGroups()->attach($sides, ['display_order' => 1]);
+            $product->optionGroups()->attach($sauces, ['display_order' => 2]);
         }
 
         $nachos = [

@@ -72,6 +72,17 @@ class OptionsSeeder extends Seeder
                 ]
             ),
 
+            'burger_options' => OptionGroup::firstOrCreate(
+                ['name' => 'Burger Options'],
+                [
+                    'is_required' => true,
+                    'min_selections' => 1,
+                    'max_selections' => 1, // Unlimited
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            ),
+
             'dips4oz' => OptionGroup::firstOrCreate(
                 ['name' => 'Dips 4oz'],
                 [
@@ -140,30 +151,30 @@ class OptionsSeeder extends Seeder
             'Cheese Stuffed Crust' => [
                 'is_default' => false,
                 'display_order' => 2,
-                '10"' => 1.50,
-                '12"' => 2.00,
-                '14"' => 2.50
+                '10"' => 2.50,
+                '12"' => 3.00,
+                '14"' => 3.50
             ],
             'Cheese & Pepperoni Stuffed Crust' => [
                 'is_default' => false,
                 'display_order' => 3,
-                '10"' => 2.00,
-                '12"' => 2.50,
-                '14"' => 3.00
+                '10"' => 2.90,
+                '12"' => 3.50,
+                '14"' => 3.90
             ],
             'Cheese & Jalapenos Stuffed Crust' => [
                 'is_default' => false,
                 'display_order' => 4,
-                '10"' => 2.00,
-                '12"' => 2.50,
-                '14"' => 3.00
+                '10"' => 2.90,
+                '12"' => 3.50,
+                '14"' => 3.90
             ],
             'Cheese Garlic & Herbs Stuffed Crust' => [
                 'is_default' => false,
                 'display_order' => 5,
-                '10"' => 2.00,
-                '12"' => 2.50,
-                '14"' => 3.00
+                '10"' => 2.90,
+                '12"' => 3.50,
+                '14"' => 3.90
             ]
         ];
 
@@ -335,6 +346,25 @@ class OptionsSeeder extends Seeder
             Option::firstOrCreate(
                 [
                     'option_group_id' => $crustOptionsGroups['sides']->id,
+                    'name' => $name
+                ],
+                [
+                    'additional_price' => $data,
+                    'is_default' => false,
+                    'display_order' => 1,
+                    'is_active' => true
+                ]
+            );
+        }
+        
+        $burger_options = [
+            'Salad' => 0,
+            'No Salad' => 0,
+        ];
+        foreach ($burger_options as $name => $data) {
+            Option::firstOrCreate(
+                [
+                    'option_group_id' => $crustOptionsGroups['burger_options']->id,
                     'name' => $name
                 ],
                 [

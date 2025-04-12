@@ -38,7 +38,7 @@ class ProductResource extends JsonResource
             }, []),
             
             // Include option groups and addon categories for products without variations
-            'option_groups' => $this->when(!$this->has_variations, function() {
+            'option_groups' => $this->when($this->optionGroups, function() {
                 return OptionGroupResource::collection($this->optionGroups);
             }, []),
             
@@ -72,7 +72,7 @@ class OptionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'price' => (float)$this->price,
+            'price' => (float)$this->additional_price,
             'is_default' => (bool)$this->is_default,
             'display_order' => $this->display_order,
         ];

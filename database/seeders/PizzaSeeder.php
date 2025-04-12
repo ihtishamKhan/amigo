@@ -34,7 +34,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'MARGARITA',
                 'description' => 'Cheese & Tomato',
                 'prices' => [
-                    '10"' => 5.50,
+                    '10"' => 6.50,
                     '12"' => 7.50,
                     '14"' => 9.90
                 ]
@@ -52,25 +52,25 @@ class PizzaSeeder extends Seeder
                 'name' => 'VEGETARIAN',
                 'description' => 'Mushroom, Onion, Peppers',
                 'prices' => [
-                    '10"' => 10.50,
-                    '12"' => 10.50,
-                    '14"' => 12.50
+                    '10"' => 8.50,
+                    '12"' => 9.50,
+                    '14"' => 10.90
                 ]
             ],
             [
                 'name' => 'LONDON PIZZA',
                 'description' => 'Chips',
                 'prices' => [
-                    '10"' => 5.50,
-                    '12"' => 7.50,
-                    '14"' => 9.90
+                    '10"' => 8.50,
+                    '12"' => 9.50,
+                    '14"' => 10.90
                 ]
             ],
             [
                 'name' => 'HAM',
                 'description' => 'Turkey Ham',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -79,7 +79,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'HAWAIIAN',
                 'description' => 'Turkey Ham & Pineapple',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -88,7 +88,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'HAM & MUSHROOM',
                 'description' => 'Turkey Ham & Mushroom',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -97,7 +97,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CALZONE',
                 'description' => '(FOLDED) Turkey Ham, Onion & Mushroom',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -106,7 +106,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN',
                 'description' => 'Chicken',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -115,7 +115,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'BBQ CHICKEN',
                 'description' => 'BBQ Sauce & Chicken',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -124,7 +124,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN CURRY',
                 'description' => 'Curry Sauce & Chicken',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -133,7 +133,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN & MUSHROOM',
                 'description' => 'Chicken & Mushroom',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -142,7 +142,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN & SWEETCORN',
                 'description' => 'Chicken & Sweetcorn',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -151,7 +151,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN KEV',
                 'description' => 'Chicken, Mushroom & Garlic',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -160,7 +160,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN TIKKA',
                 'description' => 'Chicken Tikka & Onion',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -169,7 +169,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'CHICKEN TANDOORI',
                 'description' => 'Chicken Tandoori & Onion',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -178,7 +178,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'HOT VEGETARIAN',
                 'description' => 'Chilli, Mushroom, Onion, Peppers & Sweetcorn',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -187,7 +187,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'HOT & SPICY',
                 'description' => 'Chilli, Jalapenos, Onion, Peppers & Mushroom',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -196,7 +196,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'INFERNO',
                 'description' => 'Chilli, Salami, Peppers & Jalapenos',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -205,7 +205,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'MEXICAN',
                 'description' => 'Chilli, Jalapenos, Mushroom, Onion & Jalapenos',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -214,7 +214,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'SPICY CHICKEN',
                 'description' => 'Chilli, Chicken & Jalapenos',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -223,7 +223,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'PEPPERONI',
                 'description' => 'Pepperoni',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -232,7 +232,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'PEPPERONI SPECIAL',
                 'description' => 'Pepperoni, Onion & Peppers',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -241,7 +241,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'SALAMI',
                 'description' => 'Salami',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -250,7 +250,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'BOLOGNESE',
                 'description' => 'Bolognese',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -259,7 +259,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'ALL MEAT',
                 'description' => 'Pepperoni, Salami, Bolognese & Turkey Ham',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -268,7 +268,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'KEBAB PIZZA',
                 'description' => 'Donner Meat',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -277,7 +277,7 @@ class PizzaSeeder extends Seeder
                 'name' => 'KEBAB CALZONE',
                 'description' => '(FOLDED) Donner Meat & Onion',
                 'prices' => [
-                    '10"' => 3.30,
+                    '10"' => 9.30,
                     '12"' => 10.50,
                     '14"' => 12.50
                 ]
@@ -286,8 +286,8 @@ class PizzaSeeder extends Seeder
                 'name' => 'TUNA',
                 'description' => 'Tuna',
                 'prices' => [
-                    '10"' => 3.90,
-                    '12"' => 10.90,
+                    '10"' => 9.80,
+                    '12"' => 10.80,
                     '14"' => 12.70
                 ]
             ],
@@ -295,8 +295,8 @@ class PizzaSeeder extends Seeder
                 'name' => 'TUNA SWEETCORN',
                 'description' => 'Tuna & Sweetcorn',
                 'prices' => [
-                    '10"' => 3.90,
-                    '12"' => 10.90,
+                    '10"' => 9.80,
+                    '12"' => 10.80,
                     '14"' => 12.70
                 ]
             ],
@@ -304,8 +304,8 @@ class PizzaSeeder extends Seeder
                 'name' => 'NEPTUNE',
                 'description' => 'Tuna & Prawn',
                 'prices' => [
-                    '10"' => 3.90,
-                    '12"' => 10.90,
+                    '10"' => 9.80,
+                    '12"' => 10.80,
                     '14"' => 12.70
                 ]
             ],
@@ -313,8 +313,8 @@ class PizzaSeeder extends Seeder
                 'name' => 'SEAFOOD SPECIAL',
                 'description' => 'Tuna, Prawns & Mussels',
                 'prices' => [
-                    '10"' => 3.90,
-                    '12"' => 10.90,
+                    '10"' => 9.80,
+                    '12"' => 10.80,
                     '14"' => 12.70
                 ]
             ],
