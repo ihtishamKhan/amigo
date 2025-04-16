@@ -68,7 +68,7 @@ class GarlicBreadSeeder extends Seeder
             ],
             [
                 'name' => 'Garlic Bread Cheese Special',
-                'description' => 'Garlic Bread Cheese Special',
+                'description' => 'With donner meat, chips, chilli or garlic sauce',
                 'prices' => [
                     '10"' => 9.50,
                     '12"' => 10.90,

@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
         $kebabs = [
             [
                 'category_id' => 3,
-                'name' => 'DONNER KEBAB',
+                'name' => 'LARGE DONNER KEBAB',
                 'description' => '',
                 'price' => 7.90,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
@@ -243,7 +243,7 @@ class ProductSeeder extends Seeder
             [
                 'category_id' => 4,
                 'name' => 'MEGA KEBAB WRAP',
-                'description' => '',
+                'description' => 'Comes with 2 tortilla & chips or salad',
                 'price' => 9.90,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
                 'is_active' => true,
@@ -276,7 +276,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 5,
                 'name' => 'Mexican Combo',
                 'description' => '2 x Tortillas, 1 filled with: chicken, chilli, onion, peppers & jalapenos and the other with beef, chilli, onion, peppers & jalapenos',
-                'price' => 9.99,
+                'price' => 8.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
                 'is_active' => true,
                 'is_featured' => true,
@@ -285,7 +285,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 5,
                 'name' => 'Beef Burrito',
                 'description' => '2 x Tortillas filled with beef, chilli, onion, peppers & jalapenos.',
-                'price' => 9.99,
+                'price' => 8.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
                 'is_active' => true,
                 'is_featured' => true,
@@ -294,7 +294,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 5,
                 'name' => 'Chicken Burrito',
                 'description' => '2 x Tortillas filled with chicken, chilli, onion, peppers & jalapenos.',
-                'price' => 9.99,
+                'price' => 8.50,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
                 'is_active' => true,
                 'is_featured' => true,
@@ -483,13 +483,27 @@ class ProductSeeder extends Seeder
                 [
                     'price' => isset($fAndC['price']) ? $fAndC['price'] : null,
                     'description' => $fAndC['description'],
+                    'has_variations' => isset($fAndC['variations']),
                     'has_options' => true,
                     'is_featured' => $index === 0,
                 ]
             );
 
             if(isset($fAndC['variations'])) {
-                $product->variations()->createMany($fAndC['variations']);
+                foreach ($fAndC['variations'] as $variationData) {
+                    $variation = ProductVariation::firstOrCreate(
+                        [
+                            'product_id' => $product->id,
+                            'name' => $variationData['name']
+                        ],
+                        [
+                            'price' => $variationData['price'],
+                            'is_default' => true,
+                            'display_order' => 1,
+                            'is_active' => true,
+                        ]
+                    );
+                }
             }
             
             $product->optionGroups()->sync($sides, ['display_order' => 1]);
@@ -808,20 +822,27 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'description' => $sundry['description'],
+                    'has_variations' => isset($sundry['prices']),
                     'price' => $sundry['price'] ?? null,
                     'is_featured' => $index === 0,
                 ]
             );
 
             if(isset($sundry['has_variations'])) {
-                $product->variations()->createMany(
-                    collect($sundry['prices'])->map(function ($price, $name) {
-                        return [
-                            'name' => $name,
-                            'price' => $price
-                        ];
-                    })->toArray()
-                );
+                foreach($sundry['prices'] as $name => $price) {
+                    $variation = ProductVariation::firstOrCreate(
+                        [
+                            'product_id' => $product->id,
+                            'name' => $name
+                        ],
+                        [
+                            'price' => $price,
+                            'is_default' => true,
+                            'display_order' => 1,
+                            'is_active' => true,
+                        ]
+                    );
+                }
             }
         }
 
@@ -829,14 +850,14 @@ class ProductSeeder extends Seeder
             [
                 'category_id' => 11,
                 'name' => 'Dips (4oz)',
-                'description' => '',
+                'description' => 'Chilli, Garlic, BBQ, Sweet Chilli, Ketchup',
                 'price' => 1.00,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],
             [
                 'category_id' => 11,
                 'name' => 'Dips (7oz)',
-                'description' => '',
+                'description' => 'Curry, Gravy, Mushy Peas',
                 'price' => 1.40,
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
             ],

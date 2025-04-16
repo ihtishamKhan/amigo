@@ -50,7 +50,7 @@ class PizzaSeeder extends Seeder
             ],
             [
                 'name' => 'VEGETARIAN',
-                'description' => 'Mushroom, Onion, Peppers',
+                'description' => 'Mushroom, Onion, Peppers, Sweetcorn',
                 'prices' => [
                     '10"' => 8.50,
                     '12"' => 9.50,
@@ -69,6 +69,15 @@ class PizzaSeeder extends Seeder
             [
                 'name' => 'HAM',
                 'description' => 'Turkey Ham',
+                'prices' => [
+                    '10"' => 9.30,
+                    '12"' => 10.50,
+                    '14"' => 12.50
+                ]
+            ],
+            [
+                'name' => 'MILANO',
+                'description' => 'Turkey Ham, Onion & Garlic',
                 'prices' => [
                     '10"' => 9.30,
                     '12"' => 10.50,
@@ -148,7 +157,7 @@ class PizzaSeeder extends Seeder
                 ]
             ],
             [
-                'name' => 'CHICKEN KEV',
+                'name' => 'CHICKEN KIEV',
                 'description' => 'Chicken, Mushroom & Garlic',
                 'prices' => [
                     '10"' => 9.30,
@@ -176,7 +185,7 @@ class PizzaSeeder extends Seeder
             ],
             [
                 'name' => 'HOT VEGETARIAN',
-                'description' => 'Chilli, Mushroom, Onion, Peppers & Sweetcorn',
+                'description' => 'Chilli, Mushroom, Onion, Peppers, Sweetcorn & Jalapenos',
                 'prices' => [
                     '10"' => 9.30,
                     '12"' => 10.50,
@@ -185,7 +194,7 @@ class PizzaSeeder extends Seeder
             ],
             [
                 'name' => 'HOT & SPICY',
-                'description' => 'Chilli, Jalapenos, Onion, Peppers & Mushroom',
+                'description' => 'Chilli, Bolognese, Onion, Peppers & Jalapenos',
                 'prices' => [
                     '10"' => 9.30,
                     '12"' => 10.50,
@@ -203,7 +212,7 @@ class PizzaSeeder extends Seeder
             ],
             [
                 'name' => 'MEXICAN',
-                'description' => 'Chilli, Jalapenos, Mushroom, Onion & Jalapenos',
+                'description' => 'Chilli, Bolognese, Mushroom, Onion & Jalapenos',
                 'prices' => [
                     '10"' => 9.30,
                     '12"' => 10.50,
