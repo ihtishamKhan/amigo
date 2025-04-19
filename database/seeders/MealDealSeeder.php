@@ -48,13 +48,13 @@ class MealDealSeeder extends Seeder
             ]);
         }
 
-        // Side Section - One dropdown
+        // Side Section - Two dropdown
         $sideSection = MealDealSection::create([
             'meal_deal_id' => $mealDeal1->id,
             'name' => 'Side',
             'description' => 'Choose between chips or salad',
             'required' => true,
-            'number_of_selections' => 1, // One dropdown
+            'number_of_selections' => 2, // One dropdown
             'display_order' => 2,
         ]);
 
@@ -70,13 +70,13 @@ class MealDealSeeder extends Seeder
             ]);
         }
 
-        // Sauce Section - One dropdown
+        // Sauce Section - Two dropdown
         $sauceSection = MealDealSection::create([
             'meal_deal_id' => $mealDeal1->id,
             'name' => 'Sauce',
             'description' => 'Choose between chilli or garlic',
             'required' => true,
-            'number_of_selections' => 1, // One dropdown
+            'number_of_selections' => 2, // One dropdown
             'display_order' => 3,
         ]);
 
