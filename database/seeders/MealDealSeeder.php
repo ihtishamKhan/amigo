@@ -24,13 +24,13 @@ class MealDealSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        // Donner Section
-        $donnerWrapSection = MealDealSection::create([
+        // First Donner Wrap Section
+        $donnerWrap1Section = MealDealSection::create([
             'meal_deal_id' => $mealDeal1->id,
-            'name' => 'Donner Wraps',
-            'description' => '2 x Donner wraps',
+            'name' => 'Donner Wrap 1',
+            'description' => 'Select your first donner wrap',
             'required' => true,
-            'number_of_selections' => 0, // No dropdown needed - fixed item
+            'number_of_selections' => 1, // One dropdown
             'display_order' => 1,
         ]);
 
@@ -40,21 +40,21 @@ class MealDealSeeder extends Seeder
 
         if ($donnerWrap) {
             MealDealSectionItem::create([
-                'meal_deal_section_id' => $donnerWrapSection->id,
+                'meal_deal_section_id' => $donnerWrap1Section->id,
                 'reference_type' => 'product',
                 'reference_id' => $donnerWrap->id,
-                'name_override' => '2 x Donner Wraps',
+                'name_override' => 'Donner Wrap',
                 'display_order' => 1,
             ]);
         }
 
-        // Side Section - Two dropdown
-        $sideSection = MealDealSection::create([
+        // Side for first wrap
+        $side1Section = MealDealSection::create([
             'meal_deal_id' => $mealDeal1->id,
-            'name' => 'Side',
-            'description' => 'Choose between chips or salad',
+            'name' => 'Side for Wrap 1',
+            'description' => 'Choose side for your first wrap',
             'required' => true,
-            'number_of_selections' => 2, // One dropdown
+            'number_of_selections' => 1,
             'display_order' => 2,
         ]);
 
@@ -63,20 +63,20 @@ class MealDealSeeder extends Seeder
 
         foreach ($sides as $index => $side) {
             MealDealSectionItem::create([
-                'meal_deal_section_id' => $sideSection->id,
+                'meal_deal_section_id' => $side1Section->id,
                 'reference_type' => 'option',
                 'reference_id' => $side->id,
                 'display_order' => $index + 1,
             ]);
         }
 
-        // Sauce Section - Two dropdown
-        $sauceSection = MealDealSection::create([
+        // Sauce for first wrap
+        $sauce1Section = MealDealSection::create([
             'meal_deal_id' => $mealDeal1->id,
-            'name' => 'Sauce',
-            'description' => 'Choose between chilli or garlic',
+            'name' => 'Sauce for Wrap 1',
+            'description' => 'Choose sauce for your first wrap',
             'required' => true,
-            'number_of_selections' => 2, // One dropdown
+            'number_of_selections' => 1,
             'display_order' => 3,
         ]);
 
@@ -85,57 +85,29 @@ class MealDealSeeder extends Seeder
 
         foreach ($sauces as $index => $sauce) {
             MealDealSectionItem::create([
-                'meal_deal_section_id' => $sauceSection->id,
+                'meal_deal_section_id' => $sauce1Section->id,
                 'reference_type' => 'option',
                 'reference_id' => $sauce->id,
                 'display_order' => $index + 1,
             ]);
         }
 
-        // Drinks Section - Two dropdowns for 2 cans
-        $drinksSection = MealDealSection::create([
+        // Drink for first wrap
+        $drink1Section = MealDealSection::create([
             'meal_deal_id' => $mealDeal1->id,
-            'name' => 'Drinks',
-            'description' => 'Choose 2 cans of pop',
+            'name' => 'Drink for Wrap 1',
+            'description' => 'Choose drink for your first wrap',
             'required' => true,
-            'number_of_selections' => 2, // Two dropdowns
+            'number_of_selections' => 1,
             'display_order' => 4,
         ]);
 
-        // Get can of pop product and its options
-        $canOfPop = Product::where('name', 'Can of Pop')->first();
-        if ($canOfPop) {
-            // Get options for cans of pop
-            $canOptions = \App\Models\OptionGroup::where('name', 'Can of Pop')->first()?->options;
-            if ($canOptions) {
-                foreach ($canOptions as $index => $option) {
-                    MealDealSectionItem::create([
-                        'meal_deal_section_id' => $drinksSection->id,
-                        'reference_type' => 'option',
-                        'reference_id' => $option->id,
-                        'display_order' => $index + 1,
-                    ]);
-                }
-            }
-        }
-
-
-        // Sauces Section - Two dropdowns for 2 sauces
-        $extraSaucesSection = MealDealSection::create([
-            'meal_deal_id' => $mealDeal1->id,
-            'name' => 'Extra Sauces',
-            'description' => 'Choose 2 sauces',
-            'required' => true,
-            'number_of_selections' => 2, // Two dropdowns
-            'display_order' => 5,
-        ]);
-
-        // Get all dips/sauces
-        $dipOptions = \App\Models\OptionGroup::where('name', 'Dips 4oz')->first()?->options;
-        if ($dipOptions) {
-            foreach ($dipOptions as $index => $option) {
+        // Get can of pop options
+        $canOptions = \App\Models\OptionGroup::where('name', 'Can of Pop')->first()?->options;
+        if ($canOptions) {
+            foreach ($canOptions as $index => $option) {
                 MealDealSectionItem::create([
-                    'meal_deal_section_id' => $extraSaucesSection->id,
+                    'meal_deal_section_id' => $drink1Section->id,
                     'reference_type' => 'option',
                     'reference_id' => $option->id,
                     'display_order' => $index + 1,
@@ -143,7 +115,127 @@ class MealDealSeeder extends Seeder
             }
         }
 
+        // Extra sauce for first wrap
+        $extraSauce1Section = MealDealSection::create([
+            'meal_deal_id' => $mealDeal1->id,
+            'name' => 'Extra Sauce for Wrap 1',
+            'description' => 'Choose extra sauce for your first wrap',
+            'required' => true,
+            'number_of_selections' => 1,
+            'display_order' => 5,
+        ]);
 
+        // Get dips/sauces
+        $dipOptions = \App\Models\OptionGroup::where('name', 'Dips 4oz')->first()?->options;
+        if ($dipOptions) {
+            foreach ($dipOptions as $index => $option) {
+                MealDealSectionItem::create([
+                    'meal_deal_section_id' => $extraSauce1Section->id,
+                    'reference_type' => 'option',
+                    'reference_id' => $option->id,
+                    'display_order' => $index + 1,
+                ]);
+            }
+        }
 
+        // Second Donner Wrap Section
+        $donnerWrap2Section = MealDealSection::create([
+            'meal_deal_id' => $mealDeal1->id,
+            'name' => 'Donner Wrap 2',
+            'description' => 'Select your second donner wrap',
+            'required' => true,
+            'number_of_selections' => 1,
+            'display_order' => 6,
+        ]);
+
+        if ($donnerWrap) {
+            MealDealSectionItem::create([
+                'meal_deal_section_id' => $donnerWrap2Section->id,
+                'reference_type' => 'product',
+                'reference_id' => $donnerWrap->id,
+                'name_override' => 'Donner Wrap',
+                'display_order' => 1,
+            ]);
+        }
+
+        // Side for second wrap
+        $side2Section = MealDealSection::create([
+            'meal_deal_id' => $mealDeal1->id,
+            'name' => 'Side for Wrap 2',
+            'description' => 'Choose side for your second wrap',
+            'required' => true,
+            'number_of_selections' => 1,
+            'display_order' => 7,
+        ]);
+
+        foreach ($sides as $index => $side) {
+            MealDealSectionItem::create([
+                'meal_deal_section_id' => $side2Section->id,
+                'reference_type' => 'option',
+                'reference_id' => $side->id,
+                'display_order' => $index + 1,
+            ]);
+        }
+
+        // Sauce for second wrap
+        $sauce2Section = MealDealSection::create([
+            'meal_deal_id' => $mealDeal1->id,
+            'name' => 'Sauce for Wrap 2',
+            'description' => 'Choose sauce for your second wrap',
+            'required' => true,
+            'number_of_selections' => 1,
+            'display_order' => 8,
+        ]);
+
+        foreach ($sauces as $index => $sauce) {
+            MealDealSectionItem::create([
+                'meal_deal_section_id' => $sauce2Section->id,
+                'reference_type' => 'option',
+                'reference_id' => $sauce->id,
+                'display_order' => $index + 1,
+            ]);
+        }
+
+        // Drink for second wrap
+        $drink2Section = MealDealSection::create([
+            'meal_deal_id' => $mealDeal1->id,
+            'name' => 'Drink for Wrap 2',
+            'description' => 'Choose drink for your second wrap',
+            'required' => true,
+            'number_of_selections' => 1,
+            'display_order' => 9,
+        ]);
+
+        if ($canOptions) {
+            foreach ($canOptions as $index => $option) {
+                MealDealSectionItem::create([
+                    'meal_deal_section_id' => $drink2Section->id,
+                    'reference_type' => 'option',
+                    'reference_id' => $option->id,
+                    'display_order' => $index + 1,
+                ]);
+            }
+        }
+
+        // Extra sauce for second wrap
+        $extraSauce2Section = MealDealSection::create([
+            'meal_deal_id' => $mealDeal1->id,
+            'name' => 'Extra Sauce for Wrap 2',
+            'description' => 'Choose extra sauce for your second wrap',
+            'required' => true,
+            'number_of_selections' => 1,
+            'display_order' => 10,
+        ]);
+
+        if ($dipOptions) {
+            foreach ($dipOptions as $index => $option) {
+                MealDealSectionItem::create([
+                    'meal_deal_section_id' => $extraSauce2Section->id,
+                    'reference_type' => 'option',
+                    'reference_id' => $option->id,
+                    'display_order' => $index + 1,
+                ]);
+            }
+        }
     }
 }
