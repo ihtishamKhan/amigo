@@ -94,25 +94,25 @@ class MealDealFamilyOfferSeeder extends Seeder
         }
 
         // Chips Section - Fixed item
-        $chipsSection = MealDealSection::create([
-            'meal_deal_id' => $mealDeal->id,
-            'name' => 'Chips',
-            'description' => 'Portion of chips included',
-            'required' => true,
-            'number_of_selections' => 0, // No dropdown needed - fixed item
-            'display_order' => 4,
-        ]);
+        // $chipsSection = MealDealSection::create([
+        //     'meal_deal_id' => $mealDeal->id,
+        //     'name' => 'Chips',
+        //     'description' => 'Portion of chips included',
+        //     'required' => true,
+        //     'number_of_selections' => 0, // No dropdown needed - fixed item
+        //     'display_order' => 4,
+        // ]);
 
-        // Get Chips product
-        $chips = Product::where('name', 'LIKE', '%CHIPS%')->first();
-        if ($chips) {
-            MealDealSectionItem::create([
-                'meal_deal_section_id' => $chipsSection->id,
-                'reference_type' => 'product',
-                'reference_id' => $chips->id,
-                'display_order' => 1,
-            ]);
-        }
+        // // Get Chips product
+        // $chips = Product::where('name', 'LIKE', '%CHIPS%')->first();
+        // if ($chips) {
+        //     MealDealSectionItem::create([
+        //         'meal_deal_section_id' => $chipsSection->id,
+        //         'reference_type' => 'product',
+        //         'reference_id' => $chips->id,
+        //         'display_order' => 1,
+        //     ]);
+        // }
 
         // Sauces Section - Two dropdowns for 2 sauces
         $saucesSection = MealDealSection::create([
