@@ -363,6 +363,7 @@ class ProductSeeder extends Seeder
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
                 'is_active' => true,
                 'is_featured' => true,
+                'has_options' => true,
             ],
             [
                 'category_id' => 6,
@@ -390,6 +391,7 @@ class ProductSeeder extends Seeder
                 'image' => '9bd653c8d7a9bc9cf0b9d3cae6b30d4d.png',
                 'is_active' => true,
                 'is_featured' => true,
+                'has_options' => true,
             ],
             [
                 'category_id' => 6,
@@ -474,6 +476,8 @@ class ProductSeeder extends Seeder
             ],
         ];
 
+
+        $dips4ozOptionGroup = OptionGroup::where('name', 'Dips 4oz')->first();
         foreach ($fishAndChips as $index => $fAndC) {
             $product = Product::firstOrCreate(
                 [
@@ -506,7 +510,10 @@ class ProductSeeder extends Seeder
                 }
             }
             
-            $product->optionGroups()->sync($sides, ['display_order' => 1]);
+            if(isset($fAndC['has_options']) && $fAndC['has_options']) {
+                $product->optionGroups()->sync($dips4ozOptionGroup);
+            }
+            
         }
 
         $burgers = [
