@@ -19,6 +19,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root')->middleware('auth');
 
+Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'privacy'])->name('privacy');
+
 // orders group route
 Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => 'auth'], function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
