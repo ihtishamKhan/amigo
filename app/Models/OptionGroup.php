@@ -11,6 +11,12 @@ class OptionGroup extends Model
         'display_order', 'is_active'
     ];
 
+    protected $casts = [
+        'min_selections' => 'integer',
+        'max_selections' => 'integer',
+        'display_order' => 'integer',
+    ];
+
     public function options()
     {
         return $this->hasMany(Option::class)

@@ -9,6 +9,12 @@ class AddonCategory extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'min_selections' => 'integer',
+        'max_selections' => 'integer',
+        'display_order' => 'integer',
+    ];
+
     public function addons()
     {
         return $this->hasMany(Addon::class)

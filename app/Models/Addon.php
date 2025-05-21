@@ -9,6 +9,10 @@ class Addon extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'display_order' => 'integer',
+    ];
+
     protected $fillable = [
         'addon_category_id', 'name', 'price', 'is_default',
         'display_order', 'is_active'

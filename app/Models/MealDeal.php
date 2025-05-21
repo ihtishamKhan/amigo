@@ -10,6 +10,10 @@ class MealDeal extends Model
 {
     use HasFactory, Sluggable;
 
+    protected $casts = [
+        'is_active' => 'integer',
+    ];
+
     public function sluggable(): array
     {
         return [

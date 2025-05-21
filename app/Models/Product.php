@@ -10,6 +10,10 @@ class Product extends Model
 {
     use HasFactory, Sluggable;
 
+    protected $casts = [
+        'category_id' => 'integer',
+    ];
+
     public function sluggable(): array
     {
         return [
