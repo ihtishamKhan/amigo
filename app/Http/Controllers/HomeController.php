@@ -91,6 +91,16 @@ class HomeController extends Controller
         ));
     }
 
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+
+    public function privacy()
+    {
+        return view('frontend.privacy');
+    }
+
     /*Language Translation*/
     public function lang($locale)
     {
