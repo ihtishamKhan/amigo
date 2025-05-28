@@ -35,6 +35,9 @@ Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => 'auth'], 
     Route::patch('/orders/{id}/cancel', [OrderController::class, 'cancelOrder'])->name('cancel');
 
     Route::get('/receipt/{id}', [OrderController::class, 'printReceipt'])->name('printReceipt');
+
+    
+    Route::get('/current', [OrderController::class, 'current'])->name('current');
 });
 
 // customers route

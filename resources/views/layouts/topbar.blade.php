@@ -308,7 +308,7 @@
                     <i class="bx bx-fullscreen"></i>
                 </button>
             </div> --}}
-            <div class="dropdown d-inline-block">
+            {{-- <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect"
                     id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -399,7 +399,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -407,13 +407,12 @@
                     <img class="rounded-circle header-profile-user"
                         src="{{ isset(Auth::user()->avatar) ? asset(Auth::user()->avatar) : asset('build/images/users/avatar-1.jpg') }}"
                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1"
-                        key="t-henry">{{ ucfirst(Auth::user()->name) }}</span>
+                    <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ ucfirst(Auth::user()->name) }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="javascript:void(0)"><i
+                    {{-- <a class="dropdown-item" href="javascript:void(0)"><i
                             class="bx bx-user font-size-16 align-middle me-1"></i> <span
                             key="t-profile">@lang('translation.Profile')</span></a>
                     <a class="dropdown-item" href="javascript:void(0)"><i
@@ -425,7 +424,7 @@
                             key="t-settings">@lang('translation.Settings')</span></a>
                     <a class="dropdown-item" href="javascript:void(0)"><i
                             class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span
-                            key="t-lock-screen">@lang('translation.Lock_screen')</span></a>
+                            key="t-lock-screen">@lang('translation.Lock_screen')</span></a> --}}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="javascript:void();"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
@@ -460,9 +459,9 @@
                     <div class="mb-3">
                         <label for="current_password">Current Password <span class="text-danger">*</span></label>
                         <input id="current-password" type="password"
-                            class="form-control @error('current_password') is-invalid @enderror"
-                            name="current_password" autocomplete="current_password"
-                            placeholder="Enter Current Password" value="{{ old('current_password') }}">
+                            class="form-control @error('current_password') is-invalid @enderror" name="current_password"
+                            autocomplete="current_password" placeholder="Enter Current Password"
+                            value="{{ old('current_password') }}">
                         <div class="text-danger" id="current_passwordError" data-ajax-feedback="current_password">
                         </div>
                     </div>
@@ -477,9 +476,8 @@
 
                     <div class="mb-3">
                         <label for="userpassword">Confirm Password <span class="text-danger">*</span></label>
-                        <input id="password-confirm" type="password" class="form-control"
-                            name="password_confirmation" autocomplete="new_password"
-                            placeholder="Enter New Confirm password">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                            autocomplete="new_password" placeholder="Enter New Confirm password">
                         <div class="text-danger" id="password_confirmError" data-ajax-feedback="password-confirm">
                         </div>
                     </div>

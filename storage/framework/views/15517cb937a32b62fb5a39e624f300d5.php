@@ -1,30 +1,30 @@
-@extends('layouts.master')
 
-@section('title')
-    @lang('translation.Dashboards')
-@endsection
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('li_1')
+<?php $__env->startSection('title'); ?>
+    <?php echo app('translator')->get('translation.Dashboards'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
             Dashboards
-        @endslot
-        @slot('title')
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
             Dashboard
-        @endslot
-    @endcomponent
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="row">
         <div class="col-xl-12">
             <div class="row">
                 <div class="col-md-3">
-                    <a href="{{ route('orders.index') }}">
+                    <a href="<?php echo e(route('orders.index')); ?>">
                         <div class="card mini-stats-wid">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
                                         <p class="text-muted fw-medium">Orders</p>
-                                        <h4 class="mb-0">{{ $total_orders }}</h4>
+                                        <h4 class="mb-0"><?php echo e($total_orders); ?></h4>
                                     </div>
 
                                     <div class="flex-shrink-0 align-self-center">
@@ -40,13 +40,13 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="{{ route('orders.index') }}">
+                    <a href="<?php echo e(route('orders.index')); ?>">
                         <div class="card mini-stats-wid">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
                                         <p class="text-muted fw-medium">Completed</p>
-                                        <h4 class="mb-0">{{ $completed_orders }}</h4>
+                                        <h4 class="mb-0"><?php echo e($completed_orders); ?></h4>
                                     </div>
 
                                     <div class="flex-shrink-0 align-self-center">
@@ -62,13 +62,13 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="{{ route('orders.index') }}">
+                    <a href="<?php echo e(route('orders.index')); ?>">
                         <div class="card mini-stats-wid">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
                                         <p class="text-muted fw-medium">Canceled</p>
-                                        <h4 class="mb-0">{{ $cancelled_orders }}</h4>
+                                        <h4 class="mb-0"><?php echo e($cancelled_orders); ?></h4>
                                     </div>
 
                                     <div class="flex-shrink-0 align-self-center">
@@ -84,13 +84,13 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="{{ route('orders.index') }}">
+                    <a href="<?php echo e(route('orders.index')); ?>">
                         <div class="card mini-stats-wid">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
                                         <p class="text-muted fw-medium">Revenue</p>
-                                        <h4 class="mb-0">£{{ $revenue }}</h4>
+                                        <h4 class="mb-0">£<?php echo e($revenue); ?></h4>
                                     </div>
 
                                     <div class="flex-shrink-0 align-self-center ">
@@ -120,14 +120,14 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
-    <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(URL::asset('build/libs/apexcharts/apexcharts.min.js')); ?>"></script>
 
 
     <script>
         // Add this in your blade template
-        var chartData = @json($chart_data);
+        var chartData = <?php echo json_encode($chart_data, 15, 512) ?>;
         console.log(chartData);
 
         function getChartColorsArray(chartId) {
@@ -214,4 +214,6 @@
             chart.render();
         }
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\amigo\resources\views/index.blade.php ENDPATH**/ ?>

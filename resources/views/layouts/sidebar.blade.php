@@ -23,7 +23,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('orders.index') }}" key="t-all-orders">All Orders</a></li>
-                        <li><a href="index" key="t-u-orders">Upcomming Orders</a></li>
+                        <li><a href="{{ route('orders.current') }}" key="t-c-orders">Current Orders</a></li>
                     </ul>
                 </li>
 

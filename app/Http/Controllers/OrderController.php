@@ -23,6 +23,16 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
+    public function current()
+    {
+        $orders = Order::with(['orderItems.orderable', 'user'])
+            ->where('status', 'in-progress')
+            ->latest()
+            ->get();
+
+        return view('admin.orders.current', compact('orders'));
+    }
+
     public function show($uuid)
     {
         $order = Order::with([
